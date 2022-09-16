@@ -1,0 +1,70 @@
+\documentclass[a4paper]{article}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[OT1,euler-digits]{eulervm}
+\theoremstyle{definition}
+
+\newtheorem*{definition*}{Определение}
+\newtheorem{lemma}{Лемма}[subsection]
+\newtheorem{theorem}{Теорема}[subsection]
+\newtheorem{remark}{Замечание}
+
+\renewcommand{\thelemma}{\arabic{subsection}.\arabic{lemma}}
+\renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
+
+\usepackage[left=1.25cm, right=1.25cm, top=1.5cm, bottom=2cm]{geometry}
+\setlength{\parskip}{1ex}
+
+\usepackage[table]{xcolor}
+\newcommand{\HC}{\cellcolor{gray!30}}
+\newcommand{\HR}{\rowcolor{gray!30}}
+\usepackage{calc}
+
+\renewcommand{\thesection}{\Roman{section}.}
+\renewcommand{\thesubsection}{\S\arabic{subsection}.}
+\renewcommand{\thesubsubsection}{\arabic{subsection}.\arabic{subsubsection}.}
+
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
+
+\pagestyle{fancy}
+\addtolength{\headheight}{\baselineskip}
+\renewcommand{\sectionmark}[1]{\markboth{\ifstrequal{#1}{}{}{\thesection\ #1}}{}}
+\renewcommand{\subsectionmark}[1]{\markright{\ifstrequal{#1}{}{}{\thesubsection\ #1}}}
+\fancyhead[L]{\rightmark}
+\fancyhead[R]{\leftmark}
+
+
+\usepackage{titlesec}
+\titlespacing*{\subsection}{\parindent}{1em}{0.5em}
+\titlespacing*{\subsubsection}{\the\dimexpr\parindent*2}{1em}{0.5em}
+
+\usepackage{indentfirst}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{wrapfig}
+\usepackage{graphbox}
+\graphicspath{ {./images/} }
+\title{%
+    {\Huge Математическая логика, 2022} \\
+    \vskip2ex \includegraphics[align=c, scale=0.02]{pac-man.png}\textbf{'\hskip0.5pt'\hskip0.5pt'} \textit{V.\,G.}
+}
+\date{}
+
+\usepackage{enumitem}
+
+\usepackage{expl3}
+\usepackage{subfiles}

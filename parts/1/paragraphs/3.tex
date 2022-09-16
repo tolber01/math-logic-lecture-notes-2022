@@ -1,0 +1,148 @@
+\subsection{Аксиоматическая теория исчисления высказываний}
+\subsubsection{Определение теории исчисления высказываний}
+Зададим теорию исчисления высказываний.
+
+\underline{Алфавит теории}:
+\begin{enumerate}
+    \item пропозициональные буквы $A, B, C, \dots, A_1, A_2, \dots$;
+    \item пропозициональные связки $\neg, \supset$;
+    \item специальные символы $($, $)$.
+\end{enumerate}
+\textit{Формулы} теории определяются рекуррентно по правилам:
+\begin{enumerate}
+    \item Любая пропозициональная буква есть формула.
+    \item Если $\mathcal{A}$, $\mathcal{B}$ есть формулы, то слова $(\neg\mathcal{A})$, $(\mathcal{A} \supset \mathcal{B})$ также являются формулами.
+    \item Слово является формулой в том и только том случае, когда оно получено по правилам 1 и 2. 
+\end{enumerate}
+Используются те же правила удаления лишних скобок (см. п. \ref{par:formulas_boolean}).
+
+\underline{Аксиомы теории}:
+\begin{enumerate}[label=(А\arabic*)]
+    \item $A \supset (B \supset A)$;
+    \item $\Big(A \supset (B \supset C)\Big) \supset \Big((A \supset B) \supset (A \supset C)\Big)$;
+    \item $(\neg B \supset \neg A) \supset \Big((\neg B \supset A) \supset B\Big)$.
+\end{enumerate}
+Единственное правило вывода: $B$ --- непосредственное следствие формул $A, A \supset B$, или
+\[
+    \frac{A, A \supset B}{B}.
+\]
+Это правило называется \textit{modus ponens} (\textit{MP}). Его правомерность обосновывается теоремой \ref{th:modus_ponens}.
+\begin{remark}
+    Аксиомы на самом деле являются \textit{схемами аксиом}. Это означает, что подстановка в схему любых формул вместо всех вхождений букв (все вхождения одной буквы заменяются одной и той же формулой) даёт аксиому в силу теоремы \ref{th:tautology_substitution}. Таким образом, множество аксиом в нашем исчислении бесконечно.
+\end{remark}
+\begin{remark}
+    Остальные пропозициональные связки используются для сокращения формул по эквивалентным заменам:
+    \begin{itemize}
+        \item $A \land B \Longleftrightarrow \neg(A \supset \neg B)$;
+        \item $A \lor B \Longleftrightarrow \neg A \supset B$;
+        \item $A \equiv B \Longleftrightarrow (A \supset B) \land (B \supset A)$.
+    \end{itemize}
+\end{remark}
+
+\subsubsection{Доказательства в исчислении высказываний}
+\begin{lemma}\label{th:a_supset_a}
+    $\vdash A \supset A$.
+\end{lemma}
+\begin{proof}\leavevmode
+    \begin{enumerate}
+        \item $\Big(A \supset \big((A \supset A) \supset A\big)\Big) \supset \Big(\big(A \supset (A \supset A)\big) \supset (A \supset A)\Big)$ (А2);
+        \item $A \supset \big((A \supset A) \supset A\big)$ (А1);
+        \item $\big(A \supset (A \supset A)\big) \supset (A \supset A)$ (из 1, 2 по MP);
+        \item $A \supset (A \supset A)$ (А1);
+        \item $A \supset A$ (из 3, 4 по MP).
+    \end{enumerate}
+\end{proof}
+\begin{lemma}
+    $\vdash (\neg A \supset A) \supset A$.
+\end{lemma}
+\begin{proof}\leavevmode
+    \begin{enumerate}
+        \item $\neg A \supset \neg A$ (лемма \ref{th:a_supset_a});
+        \item $(\neg A \supset \neg A) \supset \big((\neg A \supset A) \supset A\big)$ (А3);
+        \item $(\neg A \supset A) \supset A$ (из 1, 2 по MP).
+    \end{enumerate}
+\end{proof}
+\begin{lemma}
+    $A \supset B, B \supset C \vdash A \supset C$.
+\end{lemma}
+\begin{proof}\leavevmode
+    \begin{enumerate}
+        \item $B \supset C$ (гипотеза);
+        \item $(B \supset C) \supset (A \supset (B \supset C))$ (А1);
+        \item $A \supset (B \supset C)$ (из 1, 2 по MP);
+        \item $A \supset B$ (гипотеза);
+        \item $(A \supset (B \supset C)) \supset ((A \supset B) \supset (A \supset C))$ (А2);
+        \item $(A \supset B) \supset (A \supset C)$ (из 3, 5 по MP);
+        \item $A \supset C$ (из 4, 6 по MP).
+    \end{enumerate}
+\end{proof}
+\begin{lemma}
+    $\vdash A \supset (B \supset (A \supset B))$.
+\end{lemma}
+\begin{proof}
+    \item $B \supset (A \supset B)$ (А1);
+    \item $(B \supset (A \supset B)) \supset (A \supset (B \supset (A \supset B)))$ (А1);
+    \item $A \supset (B \supset (A \supset B))$ (из 1, 2 по MP).
+\end{proof}
+\begin{lemma}\leavevmode
+    \begin{enumerate}
+        \item $\vdash A \supset (A \lor B)$;
+        \item $\vdash B \supset (A \lor B)$.
+    \end{enumerate}
+\end{lemma}
+\begin{lemma}\leavevmode
+    \begin{enumerate}
+        \item $A \land B \vdash A$;
+        \item $A \land B \vdash B$.
+    \end{enumerate}
+\end{lemma}
+\begin{lemma}\label{th:double_implication}
+    $A \supset (B \supset C), B \vdash A \supset C$
+\end{lemma}
+\begin{proof}\leavevmode
+    \begin{enumerate}
+        \item $A \supset (B \supset C)$ (гипотеза);
+        \item $(A \supset (B \supset C)) \supset ((A \supset B) \supset (A \supset C))$ (А2);
+        \item $(A \supset B) \supset (A \supset C)$ (из 1, 2 по MP);
+        \item $B \supset (A \supset B)$ (А1);
+        \item $B$ (гипотеза);
+        \item $A \supset B$ (5, 4 по MP);
+        \item $A \supset C$ (из 6, 3 по MP).
+    \end{enumerate}
+\end{proof}
+\begin{lemma}\leavevmode
+    \begin{enumerate}
+        \item $\vdash \neg\neg A \supset A$;
+        \item $\vdash A \supset \neg\neg A$;
+        \item $\neg\neg A \vdash A$;
+        \item $A \vdash \neg\neg A$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Доказательство первого:
+    \begin{enumerate}
+        \item $(\neg A \supset \neg\neg A) \supset ((\neg A \supset \neg A) \supset A)$ (А3);
+        \item $\neg A \supset \neg A$ (лемма \ref{th:a_supset_a});
+        \item $(\neg A \supset \neg\neg A) \supset A$ (леммы );
+        \item $\neg\neg A \supset (\neg A \supset \neg\neg A)$ (А1);
+        \item $\neg\neg A \supset A$ (3, 4 по лемма 3.3).
+    \end{enumerate}
+\end{proof}
+
+\subsubsection{Теорема дедукции}
+\begin{theorem}[дедукция в ИВ]
+    Если $\Gamma$ --- множество формул и $\Gamma, A \vdash B$, то $\Gamma \vdash A \supset B$.
+\end{theorem}
+\begin{proof}
+    Пусть $B_1, \dots, B_n$ --- вывод $\Gamma, A \vdash B$. Тогда $B_n$ совпадает с $B$. 
+
+    Доказываем индукцией по $i = 1, \dots, n$, что $\Gamma \vdash A \supset B_i$. Тогда при $i = n$ получаем утверждение теоремы.
+
+    \underline{База}: $i = 1$. То есть имеет место $\Gamma \vdash A \supset B_1$. Тогда $B_1$ --- либо аксиома, либо совпадает с $A$, либо входит в $\Gamma$. Если $B_1$ совпадает с $A$, то $\Gamma \vdash A \supset A$ --- справедливое утверждение. Если $B_1$ есть аксиома, то тогда, написав аксиому $B_1 \supset (A \supset B_1)$, по MP получаем вывод $A \supset B_1$.
+
+    \underline{Индукционное предположение}: Пусть $\Gamma \vdash A \supset B_i$ для всех $i = 1, \dots, m - 1$.
+    
+    \underline{Индукционный шаг}: Докажем $\Gamma \vdash A \supset B_m$. Тогда либо $B_m$ --- аксиома, либо $B_m$ совпадает с $A$, либо входит в $\Gamma$, либо выводится из каких-то предыдущих формул $B_r, B_q$ по MP, $r, q < m$. Проверка первых трёх случаев дословно повторяет проверку в базе индукции. Пусть $r < q$. Тогда $B_q$ имеет вид $B_r \supset B_m$. По предположению индукции $\Gamma \vdash A \supset B_r$ и $\Gamma \vdash A \supset B_q$ или $\Gamma \vdash A \supset (B_r \supset B_m)$. Запишем аксиому А2: $(A \supset (\underbrace{B_r \supset B_m}_{B_q})) \supset ((A \supset B_r) \supset (A \supset B_m))$. Дважды применяя MP (написанная аксиома и $A \supset B_q$, а затем $A \supset B_r$ и $(A \supset B_r) \supset (A \supset B_m)$), получаем искомую импликацию $A \supset B_m$.
+
+    Таким образом, по индукции доказано, что имеет место $\Gamma \vdash A \supset B_n$, то есть $\Gamma \vdash A \supset B$.
+\end{proof}
