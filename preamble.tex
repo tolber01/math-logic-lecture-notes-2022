@@ -9,13 +9,18 @@
 \usepackage[OT1,euler-digits]{eulervm}
 \theoremstyle{definition}
 
+\usepackage{mdframed}
 \newtheorem*{definition*}{Определение}
-\newtheorem{lemma}{Лемма}[subsection]
-\newtheorem{theorem}{Теорема}[subsection]
+\newmdtheoremenv{lemma}{Лемма}[subsection]
+\newmdtheoremenv{theorem}{Теорема}[subsection]
+\newtheorem*{corollary*}{Следствие}
 \newtheorem{remark}{Замечание}
+\newtheorem*{remark*}{Замечание}
 
 \renewcommand{\thelemma}{\arabic{subsection}.\arabic{lemma}}
 \renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
 
 \usepackage[left=1.25cm, right=1.25cm, top=1.5cm, bottom=2cm]{geometry}
 \setlength{\parskip}{1ex}

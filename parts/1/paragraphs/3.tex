@@ -2,7 +2,7 @@
 \subsubsection{Определение теории исчисления высказываний}
 Зададим теорию исчисления высказываний.
 
-\underline{Алфавит теории}:
+\textbf{Алфавит теории}:
 \begin{enumerate}
     \item пропозициональные буквы $A, B, C, \dots, A_1, A_2, \dots$;
     \item пропозициональные связки $\neg, \supset$;
@@ -16,15 +16,15 @@
 \end{enumerate}
 Используются те же правила удаления лишних скобок (см. п. \ref{par:formulas_boolean}).
 
-\underline{Аксиомы теории}:
+\textbf{Аксиомы теории}:
 \begin{enumerate}[label=(А\arabic*)]
     \item $A \supset (B \supset A)$;
     \item $\Big(A \supset (B \supset C)\Big) \supset \Big((A \supset B) \supset (A \supset C)\Big)$;
     \item $(\neg B \supset \neg A) \supset \Big((\neg B \supset A) \supset B\Big)$.
 \end{enumerate}
-Единственное правило вывода: $B$ --- непосредственное следствие формул $A, A \supset B$, или
+Единственное правило вывода: $B$ --- непосредственное следствие формул $A$, $A \supset B$, или
 \[
-    \frac{A, A \supset B}{B}.
+    \frac{A,\ A \supset B}{B}.
 \]
 Это правило называется \textit{modus ponens} (\textit{MP}). Его правомерность обосновывается теоремой \ref{th:modus_ponens}.
 \begin{remark}
@@ -52,6 +52,7 @@
         \item $A \supset A$ (из 3, 4 по MP).
     \end{enumerate}
 \end{proof}
+
 \begin{lemma}
     $\vdash (\neg A \supset A) \supset A$.
 \end{lemma}
@@ -62,47 +63,66 @@
         \item $(\neg A \supset A) \supset A$ (из 1, 2 по MP).
     \end{enumerate}
 \end{proof}
-\begin{lemma}
-    $A \supset B, B \supset C \vdash A \supset C$.
+
+\begin{lemma}\label{th:implication_transitivity}
+    $A \supset B,\ B \supset C \vdash A \supset C$.
 \end{lemma}
 \begin{proof}\leavevmode
     \begin{enumerate}
         \item $B \supset C$ (гипотеза);
-        \item $(B \supset C) \supset (A \supset (B \supset C))$ (А1);
+        \item $(B \supset C) \supset \big(A \supset (B \supset C)\big)$ (А1);
         \item $A \supset (B \supset C)$ (из 1, 2 по MP);
         \item $A \supset B$ (гипотеза);
-        \item $(A \supset (B \supset C)) \supset ((A \supset B) \supset (A \supset C))$ (А2);
+        \item $\big(A \supset (B \supset C)\big) \supset \big((A \supset B) \supset (A \supset C)\big)$ (А2);
         \item $(A \supset B) \supset (A \supset C)$ (из 3, 5 по MP);
         \item $A \supset C$ (из 4, 6 по MP).
     \end{enumerate}
 \end{proof}
+
 \begin{lemma}
-    $\vdash A \supset (B \supset (A \supset B))$.
+    $\vdash A \supset \big(B \supset (A \supset B)\big)$.
 \end{lemma}
-\begin{proof}
-    \item $B \supset (A \supset B)$ (А1);
-    \item $(B \supset (A \supset B)) \supset (A \supset (B \supset (A \supset B)))$ (А1);
-    \item $A \supset (B \supset (A \supset B))$ (из 1, 2 по MP).
-\end{proof}
-\begin{lemma}\leavevmode
+\begin{proof}\leavevmode
     \begin{enumerate}
+        \item $B \supset (A \supset B)$ (А1);
+        \item $\big(B \supset (A \supset B)\big) \supset \Big(A \supset \big(B \supset (A \supset B)\big)\Big)$ (А1);
+        \item $A \supset \big(B \supset (A \supset B)\big)$ (из 1, 2 по MP).
+    \end{enumerate}
+\end{proof}
+
+\begin{lemma}\leavevmode
+    \begin{enumerate}[label=\arabic*)]
         \item $\vdash A \supset (A \lor B)$;
         \item $\vdash B \supset (A \lor B)$.
     \end{enumerate}
 \end{lemma}
+\begin{proof}\leavevmode
+    \begin{enumerate}[label=\arabic*)]
+        \item ??? (\textit{можно вывести из $A, \neg A \vdash B$ и двойного применения теоремы дедукции}).
+        \item Запись $B \supset (A \lor B)$ понимается как $B \supset (\neg A \supset B)$, что есть просто аксиома А1.
+    \end{enumerate}
+\end{proof}
+
 \begin{lemma}\leavevmode
-    \begin{enumerate}
+    \begin{enumerate}[label=\arabic*)]
         \item $A \land B \vdash A$;
         \item $A \land B \vdash B$.
     \end{enumerate}
 \end{lemma}
-\begin{lemma}\label{th:double_implication}
-    $A \supset (B \supset C), B \vdash A \supset C$
+\begin{proof}\leavevmode
+    \begin{enumerate}[label=\arabic*)]
+        \item ???.
+        \item ???.
+    \end{enumerate}
+\end{proof}
+
+\begin{lemma}\label{th:implication_and_middle}
+    $A \supset (B \supset C),\ B \vdash A \supset C$
 \end{lemma}
 \begin{proof}\leavevmode
     \begin{enumerate}
         \item $A \supset (B \supset C)$ (гипотеза);
-        \item $(A \supset (B \supset C)) \supset ((A \supset B) \supset (A \supset C))$ (А2);
+        \item $\big(A \supset (B \supset C)\big) \supset \big((A \supset B) \supset (A \supset C)\big)$ (А2);
         \item $(A \supset B) \supset (A \supset C)$ (из 1, 2 по MP);
         \item $B \supset (A \supset B)$ (А1);
         \item $B$ (гипотеза);
@@ -110,39 +130,184 @@
         \item $A \supset C$ (из 6, 3 по MP).
     \end{enumerate}
 \end{proof}
-\begin{lemma}\leavevmode
-    \begin{enumerate}
+
+\begin{lemma}\label{th:negations}\leavevmode
+    \begin{enumerate}[label=\arabic*)]
         \item $\vdash \neg\neg A \supset A$;
         \item $\vdash A \supset \neg\neg A$;
         \item $\neg\neg A \vdash A$;
         \item $A \vdash \neg\neg A$.
     \end{enumerate}
 \end{lemma}
-\begin{proof}
-    Доказательство первого:
-    \begin{enumerate}
-        \item $(\neg A \supset \neg\neg A) \supset ((\neg A \supset \neg A) \supset A)$ (А3);
-        \item $\neg A \supset \neg A$ (лемма \ref{th:a_supset_a});
-        \item $(\neg A \supset \neg\neg A) \supset A$ (леммы );
-        \item $\neg\neg A \supset (\neg A \supset \neg\neg A)$ (А1);
-        \item $\neg\neg A \supset A$ (3, 4 по лемма 3.3).
+\begin{proof}\leavevmode
+    \begin{enumerate}[label=\arabic*)]
+        \item\label{item:negnegA_A}
+        \begin{enumerate}[label=\arabic*.]
+            \item $(\neg A \supset \neg\neg A) \supset \big((\neg A \supset \neg A) \supset A\big)$ (А3);
+            \item $\neg A \supset \neg A$ (лемма \ref{th:a_supset_a});
+            \item $(\neg A \supset \neg\neg A) \supset A$ (из 1, 2 по лемме \ref{th:implication_and_middle});
+            \item $\neg\neg A \supset (\neg A \supset \neg\neg A)$ (А1);
+            \item $\neg\neg A \supset A$ (из 4, 3 по лемме \ref{th:implication_transitivity}).
+        \end{enumerate}
+        \item
+        \begin{enumerate}[label=\arabic*.]
+            \item $(\neg\neg\neg A \supset \neg A) \supset \big((\neg\neg\neg A \supset A) \supset \neg\neg A\big)$ (А3);
+            \item $\neg\neg\neg A \supset \neg A$ (формула $\neg\neg A \supset A$ с подстановкой $A \leftrightharpoons \neg A$);
+            \item $(\neg\neg\neg A \supset A) \supset \neg\neg A$ (из 2, 1 по MP);
+            \item $A \supset (\neg\neg\neg A \supset A)$ (А1);
+            \item $A \supset \neg\neg A$ (из 4, 3 по лемме \ref{th:implication_transitivity}).
+        \end{enumerate}
+        \item
+        \begin{enumerate}[label=\arabic*.]
+            \item $\neg\neg A$ (гипотеза);
+            \item $\neg\neg A \supset A$ (выведенная теорема в п. 1);
+            \item $A$ (из 1, 2 по MP).
+        \end{enumerate}
+        \item
+        \begin{enumerate}[label=\arabic*.]
+            \item $A$ (гипотеза);
+            \item $A \supset \neg\neg A$ (выведенная теорема в п. 2);
+            \item $\neg\neg A$ (из 1, 2 по MP).
+        \end{enumerate}
     \end{enumerate}
 \end{proof}
 
 \subsubsection{Теорема дедукции}
-\begin{theorem}[дедукция в ИВ]
+\nobreak\vspace{0.5em}
+\nopagebreak
+\begin{theorem}[\textit{дедукция в ИВ}]
     Если $\Gamma$ --- множество формул и $\Gamma, A \vdash B$, то $\Gamma \vdash A \supset B$.
 \end{theorem}
-\begin{proof}
-    Пусть $B_1, \dots, B_n$ --- вывод $\Gamma, A \vdash B$. Тогда $B_n$ совпадает с $B$. 
+\begin{proof}\leavevmode
 
-    Доказываем индукцией по $i = 1, \dots, n$, что $\Gamma \vdash A \supset B_i$. Тогда при $i = n$ получаем утверждение теоремы.
+    Пусть $B_1, B_2, \dots, B_n$ --- вывод $\Gamma, A \vdash B$. Тогда $B_n$ совпадает с $B$. 
 
-    \underline{База}: $i = 1$. То есть имеет место $\Gamma \vdash A \supset B_1$. Тогда $B_1$ --- либо аксиома, либо совпадает с $A$, либо входит в $\Gamma$. Если $B_1$ совпадает с $A$, то $\Gamma \vdash A \supset A$ --- справедливое утверждение. Если $B_1$ есть аксиома, то тогда, написав аксиому $B_1 \supset (A \supset B_1)$, по MP получаем вывод $A \supset B_1$.
+    Доказав индукцией по $i = 1, 2, \dots, n$, что $\Gamma \vdash A \supset B_i$, мы получим утверждение теоремы при $i = n$.
 
-    \underline{Индукционное предположение}: Пусть $\Gamma \vdash A \supset B_i$ для всех $i = 1, \dots, m - 1$.
+    \textbf{База}: $i = 1$ и $i = 2$. \\
+    Проверим $\Gamma \vdash A \supset B_1$. Имеются следующие варианты: $B_1$ --- либо аксиома, либо совпадает с $A$, либо входит в $\Gamma$. Если $B_1$ совпадает с $A$, то $\Gamma \vdash A \supset A$ --- справедливое утверждение (лемма \ref{th:a_supset_a}). Если $B_1$ есть аксиома или $B_1 \in \Gamma$, то, написав первую аксиому $B_1 \supset (A \supset B_1)$, из $B_1$ и написанной аксиомы по MP выводим требуемую формулу $A \supset B_1$. \\
+    Очевидно, что для формулы $B_2$ допускаются точно такие же варианты и рассуждения, ибо вывод $B_2$ по MP невозможен --- перед $B_2$ в выводе должно идти по меньшей мере две формулы.
+
+    \textbf{Индукционное предположение}: Пусть $\Gamma \vdash A \supset B_j$ для всех $j = 1, 2, \dots, i - 1$.
     
-    \underline{Индукционный шаг}: Докажем $\Gamma \vdash A \supset B_m$. Тогда либо $B_m$ --- аксиома, либо $B_m$ совпадает с $A$, либо входит в $\Gamma$, либо выводится из каких-то предыдущих формул $B_r, B_q$ по MP, $r, q < m$. Проверка первых трёх случаев дословно повторяет проверку в базе индукции. Пусть $r < q$. Тогда $B_q$ имеет вид $B_r \supset B_m$. По предположению индукции $\Gamma \vdash A \supset B_r$ и $\Gamma \vdash A \supset B_q$ или $\Gamma \vdash A \supset (B_r \supset B_m)$. Запишем аксиому А2: $(A \supset (\underbrace{B_r \supset B_m}_{B_q})) \supset ((A \supset B_r) \supset (A \supset B_m))$. Дважды применяя MP (написанная аксиома и $A \supset B_q$, а затем $A \supset B_r$ и $(A \supset B_r) \supset (A \supset B_m)$), получаем искомую импликацию $A \supset B_m$.
+    \textbf{Индукционный шаг}: Докажем $\Gamma \vdash A \supset B_i$. \\
+    Снова имеются варианты: $B_i$ --- аксиома, либо $B_i$ совпадает с $A$, либо входит в $\Gamma$, либо выводится из каких-то предыдущих формул $B_r, B_q$ по MP ($r, q < i$). Проверка первых трёх случаев дословно повторяет проверку в базе индукции. Пусть $r < q$. Тогда $B_q$ имеет вид $B_r \supset B_i$. По предположению индукции верны $\Gamma \vdash A \supset B_r$ и $\Gamma \vdash A \supset B_q$. Запишем аксиому А2: $\big(A \supset (\underbrace{B_r \supset B_i}_{B_q})\big) \supset \big((A \supset B_r) \supset (A \supset B_i)\big)$. Дважды применяя MP ($A \supset B_q$ и написанная аксиома, а затем $A \supset B_r$ и $(A \supset B_r) \supset (A \supset B_i)$), получаем искомую формулу $A \supset B_i$.
 
-    Таким образом, по индукции доказано, что имеет место $\Gamma \vdash A \supset B_n$, то есть $\Gamma \vdash A \supset B$.
+    Таким образом, по индукции доказано, что имеет место $\Gamma \vdash A \supset B$, то есть $\Gamma \vdash A \supset B$.
+\end{proof}
+
+\begin{corollary*}
+    Если $A \vdash B$, то $\vdash A \supset B$.
+\end{corollary*}
+
+\begin{remark*}[от автора конспекта]
+    Теорема дедукции верна и в обратную сторону: если $\Gamma \vdash A \supset B$, то справедливо $\Gamma, A \vdash B$.
+\end{remark*}
+\begin{proof}
+    Напишем вывод $\Gamma \vdash A \supset B$, состоящий из формул $C_1, C_2, \dots, C_n$, где $C_n$ совпадает с $A \supset B$, а каждая из предыдущих формул либо аксиома, либо входит в $\Gamma$, либо выводится из некоторых предшествующих по MP. Далее допишем к написанному выводу формулу $A$ как гипотезу (а это именно гипотеза для $\Gamma, A \vdash B$) и выведем $B$ из $A$ и $C_n$ по MP.
+\end{proof}
+
+\subsubsection{Применение теоремы дедукции}
+\begin{proof}[Доказательство леммы \ref{th:implication_transitivity}]\leavevmode
+    
+    Вывод $A \supset B,\ B \supset C,\ A \vdash C$:
+    \begin{enumerate}
+        \item $A \supset B$ (гипотеза);
+        \item $A$ (гипотеза);
+        \item $B$ (из 2, 1 по MP);
+        \item $B \supset C$ (гипотеза);
+        \item $C$ (из 3, 4 по MP).
+    \end{enumerate}
+    Теперь, применяя теорему дедукции, получаем $A \supset B, B \supset C \vdash A \supset C$.
+\end{proof}
+
+\begin{lemma}
+    $A \supset (B \supset C) \vdash B \supset (A \supset C)$.
+\end{lemma}
+\begin{proof}\leavevmode
+
+    Вывод $A \supset (B \supset C),\ B,\ A \vdash C$:
+    \begin{enumerate}
+        \item $A$ (гипотеза);
+        \item $A \supset (B \supset C)$ (гипотеза);
+        \item $B \supset C$ (из 1, 2 по MP);
+        \item $B$ (гипотеза);
+        \item $C$ (из 4, 3 по MP).
+    \end{enumerate}
+    Теперь, дважды применяя теорему дедукции, получаем требуемое: $A \supset (B \supset C) \vdash B \supset (A \supset C)$.
+\end{proof}
+
+\begin{lemma}\leavevmode
+    \begin{enumerate}[label=\arabic*)]
+        \item $\vdash \neg A \supset (A \supset B)$;
+        \item $\vdash (\neg B \supset \neg A) \supset (A \supset B)$ (\textit{доказательство от противного});
+        \item\label{item:contraposition} $\vdash (A \supset B) \supset (\neg B \supset \neg A)$ (\textit{контрапозиция});
+        \item $\vdash A \supset \big(\neg B \supset \neg(A \supset B)\big)$;
+        \item $\vdash (A \supset B) \supset \big((\neg A \supset B) \supset B\big)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}\leavevmode
+    \begin{enumerate}[label=\arabic*)]
+        \item Доказательство $\neg A,\ A \vdash B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\neg A$ (гипотеза);
+            \item $A$ (гипотеза);
+            \item $A \supset (\neg B \supset A)$ (А1);
+            \item $\neg A \supset (\neg B \supset \neg A)$ (А1);
+            \item $\neg B \supset A$ (из 2, 3 по MP);
+            \item $\neg B \supset \neg A$ (из 1, 4 по MP);
+            \item $(\neg B \supset \neg A) \supset \big((\neg B \supset A) \supset B\big)$ (А3);
+            \item $(\neg B \supset A) \supset B$ (из 6, 7 по MP);
+            \item $B$ (из 5, 8 по MP).
+        \end{enumerate}
+        Теперь дважды применяем теорему дедукции и получаем искомую выводимость.
+
+        \item Доказательство $\neg B \supset \neg A,\ A \supset B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\neg B \supset \neg A$ (гипотеза);
+            \item $A$ (гипотеза);
+            \item $(\neg B \supset \neg A) \supset \big((\neg B \supset A) \supset B\big)$ (А3);
+            \item $A \supset (\neg B \supset A)$ (А1);
+            \item $(\neg B \supset A) \supset B$ (из 1, 3 по MP);
+            \item $A \supset B$ (из 4, 5 по лемме \ref{th:implication_transitivity});
+            \item $B$ (из 2, 6 по MP).
+        \end{enumerate}
+        Теперь дважды применяем теорему дедукции и получаем искомую выводимость.
+
+        \item Доказательство $A \supset B,\ \neg\neg A \vdash B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\neg\neg A$ (гипотеза);
+            \item $A$ (согласно выведенному $\neg\neg A \vdash A$ в лемме \ref{th:negations});
+            \item $A \supset B$ (гипотеза);
+            \item $B$ (из 2, 3 по MP).
+        \end{enumerate}
+        Тогда по теореме дедукции справедливо $A \supset B \vdash \neg\neg A \supset B$. Далее докажем $A \supset B,\ \neg B \vdash \neg A$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\neg B \supset (\neg\neg A \supset \neg B)$ (А1);
+            \item $\neg B$ (гипотеза);
+            \item $\neg\neg A \supset \neg B$ (из 2, 1 по MP);
+            \item $(\neg\neg A \supset \neg B) \supset \big((\neg\neg A \supset B) \supset \neg A\big)$ (А3);
+            \item $(\neg\neg A \supset B) \supset \neg A$ (из 3, 4 по MP);
+            \item $A \supset B$ (гипотеза);
+            \item $\neg\neg A \supset B$ (согласно доказанному $A \supset B \vdash \neg\neg A \supset B$);
+            \item $\neg A$ (из 7, 5 по MP).
+        \end{enumerate}
+        Тогда, дважды применяя теорему дедукции, получаем требуемую выводимость: $\vdash (A \supset B) \supset (\neg B \supset \neg A)$.
+
+        \item Ясно, что $A,\ A \supset B \vdash B$. Дважды используя теорему дедукции, получаем $\vdash A \supset \big((A \supset B) \supset B\big)$. Далее согласно \ref{item:contraposition} получаем $\vdash \big((A \supset B) \supset B\big) \supset \big(\neg B \supset \neg \big(A \supset B)\big)$. Наконец, задействуя лемму \ref{th:implication_transitivity} на предыдущих двух выводимостях, получаем искомое $\vdash A \supset \big(\neg B \supset \neg(A \supset B)\big)$.
+
+        \item Доказательство $A \supset B,\ \neg A \supset B \vdash B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $A \supset B$ (гипотеза);
+            \item $\neg A \supset B$ (гипотеза);
+            \item $(A \supset B) \supset (\neg B \supset \neg A)$ (доказанная формула контрапозиции);
+            \item $\neg B \supset \neg A$ (из 1, 3 по MP);
+            \item $(\neg A \supset B) \supset (\neg B \supset \neg\neg A)$ (доказанная формула контрапозиции);
+            \item $\neg B \supset \neg\neg A$ (из 2, 5 по MP);
+            \item $(\neg B \supset \neg\neg A) \supset \big((\neg B \supset \neg A) \supset B\big)$ (А3);
+            \item $(\neg B \supset \neg A) \supset B$ (из 6, 7 по MP);
+            \item $B$ (из 4, 8 по MP).
+        \end{enumerate}
+        Теперь дважды применяем теорему дедукции и получаем искомую выводимость.
+    \end{enumerate}
 \end{proof}
