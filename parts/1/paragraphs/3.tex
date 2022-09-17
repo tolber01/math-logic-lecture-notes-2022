@@ -193,14 +193,14 @@
     \textbf{Индукционный шаг}: Докажем $\Gamma \vdash A \supset B_i$. \\
     Снова имеются варианты: $B_i$ --- аксиома, либо $B_i$ совпадает с $A$, либо входит в $\Gamma$, либо выводится из каких-то предыдущих формул $B_r, B_q$ по MP ($r, q < i$). Проверка первых трёх случаев дословно повторяет проверку в базе индукции. Пусть $r < q$. Тогда $B_q$ имеет вид $B_r \supset B_i$. По предположению индукции верны $\Gamma \vdash A \supset B_r$ и $\Gamma \vdash A \supset B_q$. Запишем аксиому А2: $\big(A \supset (\underbrace{B_r \supset B_i}_{B_q})\big) \supset \big((A \supset B_r) \supset (A \supset B_i)\big)$. Дважды применяя MP ($A \supset B_q$ и написанная аксиома, а затем $A \supset B_r$ и $(A \supset B_r) \supset (A \supset B_i)$), получаем искомую формулу $A \supset B_i$.
 
-    Таким образом, по индукции доказано, что имеет место $\Gamma \vdash A \supset B$, то есть $\Gamma \vdash A \supset B$.
+    Таким образом, по индукции доказано, что имеет место $\Gamma \vdash A \supset B_n$, то есть $\Gamma \vdash A \supset B$.
 \end{proof}
 
 \begin{corollary*}
     Если $A \vdash B$, то $\vdash A \supset B$.
 \end{corollary*}
 
-\begin{remark*}[от автора конспекта]
+\begin{remark*}[\textit{от автора конспекта}]
     Теорема дедукции верна и в обратную сторону: если $\Gamma \vdash A \supset B$, то справедливо $\Gamma, A \vdash B$.
 \end{remark*}
 \begin{proof}
