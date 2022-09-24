@@ -1,9 +1,9 @@
 \subsection{Другие аксиоматические теории ИВ}
 \subsubsection{Исчесление Гильберта--Аккермана}
 
-Примитивные связки: $\neg$, $\lor$, а $\supset$ --- сокращение $\neg A \lor B$.
+\textbf{Примитивные связки}: $\neg$, $\lor$, а $A \supset B$ --- сокращение $\neg A \lor B$.
 
-Схема аксиом:
+\textbf{Схемы аксиом}:
 \begin{enumerate}[label=(А\arabic*)]
     \item $A \lor A \supset A$;
     \item $A \supset (A \lor B)$;
@@ -11,9 +11,113 @@
     \item $(B \supset C) \supset \big((A \lor B) \supset (A \lor C)\big)$.
 \end{enumerate}
 
-Правило вывода: MP.
+\textbf{Правило вывода}: MP.
 
 \subsubsection{Исчисление Россера}
-Примитивные связки: $\neg$, $\land$, а $\supset$ --- сокращение $\neg(A \land \neg B)$.
+\textbf{Примитивные связки}: $\neg$, $\land$, а $A \supset B$ --- сокращение $\neg(A \land \neg B)$.
 
-...
+\textbf{Схемы аксиом}:
+\begin{enumerate}[label=(А\arabic*)]
+    \item $A \supset A \land A$;
+    \item $A \land B \supset A$;
+    \item $(A \supset B) \supset \big(\neg(B \land C) \supset \neg(C \land A)\big)$.
+\end{enumerate}
+
+\textbf{Правило вывода}: MP.
+
+\subsubsection{Исчисление секвенций}
+\textbf{Примитивные связки}: $\neg$, $\lor$, $\land$, $\supset$.
+
+\textbf{Специальный символ}: $\vdash$.
+
+\textit{Секвенциями} называются слова следующих трёх видов, где $A_1, A_2, \dots, A_n, B$ --- произвольные формулы:
+\begin{enumerate}
+    \item $A_1, A_2, \dots, A_n \vdash B$ (из $A_1, A_2, \dots, A_n$ следует $B_n$);
+    \item $\vdash B$ ($B$ доказуема);
+    \item $A_1, A_2, \dots, A_n \vdash$ (система $A_1, A_2, \dots, A_n$ противоречива).
+\end{enumerate}
+
+\textbf{Схема аксиом}: $A \vdash A$.
+
+\textbf{Правила вывода}, где $\Gamma, \Gamma_1, \Gamma_2, \Gamma_3$ --- произвольные конечные (может быть, пустые) последовательности формул, а $A, B, C$ --- произвольные формулы:
+\begin{enumerate}[label=\arabic*)]
+    \item введение $\land$
+    \[
+        \frac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash B}{\Gamma_1, \Gamma_2 \vdash A \land B};
+    \]
+    \item удаление $\land$
+    \[
+        \frac{\Gamma \vdash A \land B}{\Gamma \vdash A};
+    \]
+    \item удаление $\land$
+    \[
+        \frac{\Gamma \vdash A \land B}{\Gamma \vdash B};
+    \]
+    \item введение $\lor$
+    \[
+        \frac{\Gamma \vdash A}{\Gamma \vdash A \lor B};
+    \]
+    \item введение $\lor$
+    \[
+        \frac{\Gamma \vdash B}{\Gamma \vdash A \lor B};
+    \]
+    \item удаление $\lor$
+    \[
+        \frac{\Gamma_1 \vdash A \lor B;\ \Gamma_2, A \vdash C;\ \Gamma_3, B \vdash C}{\Gamma_1, \Gamma_2, \Gamma_3 \vdash C};
+    \]
+    \item введение $\supset$
+    \[
+        \frac{\Gamma, A \vdash B}{\Gamma \vdash A \supset B};
+    \]
+    \item удаление $\supset$
+    \[
+        \frac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash A \supset B}{\Gamma_1, \Gamma_2 \vdash B};
+    \]
+    \item введение $\neg$
+    \[
+        \frac{\Gamma, A \vdash}{\Gamma \vdash \neg A};
+    \]
+    \item сведение к противоречию
+    \[
+        \frac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash \neg A}{\Gamma_1, \Gamma_2 \vdash};
+    \]
+    \item удаление $\neg$
+    \[
+        \frac{\Gamma, \neg A \vdash}{\Gamma \vdash A};
+    \]
+    \item утончение
+    \[
+        \frac{\Gamma \vdash}{\Gamma \vdash A};
+    \]
+    \item расширение
+    \[
+        \frac{\Gamma \vdash A}{\Gamma, B \vdash A};
+    \]
+    \item перестановка
+    \[
+        \frac{\Gamma_1, A, B, \Gamma_2 \vdash C}{\Gamma_1, B, A, \Gamma_2 \vdash C};
+    \]
+    \item сокращение
+    \[
+        \frac{\Gamma, A, A \vdash C}{\Gamma, A \vdash C}.
+    \]
+\end{enumerate}
+
+\subsubsection{Исчисление Клини}
+\textbf{Примитивные связки}: $\neg$, $\land$, $\lor$, $\supset$.
+
+\textbf{Схемы аксиом}:
+\begin{enumerate}[label=(А\arabic*)]
+    \item $A \supset (B \supset A)$;
+    \item $(A \supset B) \supset \Big(\big(A \supset (B \supset C)\big) \supset (A \supset C)\Big)$;
+    \item $A \land B \supset A$;
+    \item $A \land B \supset B$;
+    \item $(A \supset C) \supset \big((A \supset B) \supset (A \supset B \land C)\big)$;
+    \item $A \supset (A \lor B)$;
+    \item $B \supset (A \lor B)$;
+    \item $(A \supset C) \supset \Big((B \supset C) \supset \big((A \lor B) \supset C\big)\Big)$;
+    \item $(A \supset \neg B) \supset (B \supset \neg A)$;
+    \item $\neg\neg A \supset A$.
+\end{enumerate}
+
+\textbf{Правило вывода}: MP.
