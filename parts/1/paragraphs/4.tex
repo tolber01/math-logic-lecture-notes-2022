@@ -41,66 +41,21 @@
 
 \textbf{Правила вывода}, где $\Gamma, \Gamma_1, \Gamma_2, \Gamma_3$ --- произвольные конечные (может быть, пустые) последовательности формул, а $A, B, C$ --- произвольные формулы:
 \begin{enumerate}[label=\arabic*)]
-    \item введение $\land$
-    \[
-        \frac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash B}{\Gamma_1, \Gamma_2 \vdash A \land B};
-    \]
-    \item удаление $\land$
-    \[
-        \frac{\Gamma \vdash A \land B}{\Gamma \vdash A};
-    \]
-    \item удаление $\land$
-    \[
-        \frac{\Gamma \vdash A \land B}{\Gamma \vdash B};
-    \]
-    \item введение $\lor$
-    \[
-        \frac{\Gamma \vdash A}{\Gamma \vdash A \lor B};
-    \]
-    \item введение $\lor$
-    \[
-        \frac{\Gamma \vdash B}{\Gamma \vdash A \lor B};
-    \]
-    \item удаление $\lor$
-    \[
-        \frac{\Gamma_1 \vdash A \lor B;\ \Gamma_2, A \vdash C;\ \Gamma_3, B \vdash C}{\Gamma_1, \Gamma_2, \Gamma_3 \vdash C};
-    \]
-    \item введение $\supset$
-    \[
-        \frac{\Gamma, A \vdash B}{\Gamma \vdash A \supset B};
-    \]
-    \item удаление $\supset$
-    \[
-        \frac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash A \supset B}{\Gamma_1, \Gamma_2 \vdash B};
-    \]
-    \item введение $\neg$
-    \[
-        \frac{\Gamma, A \vdash}{\Gamma \vdash \neg A};
-    \]
-    \item сведение к противоречию
-    \[
-        \frac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash \neg A}{\Gamma_1, \Gamma_2 \vdash};
-    \]
-    \item удаление $\neg$
-    \[
-        \frac{\Gamma, \neg A \vdash}{\Gamma \vdash A};
-    \]
-    \item утончение
-    \[
-        \frac{\Gamma \vdash}{\Gamma \vdash A};
-    \]
-    \item расширение
-    \[
-        \frac{\Gamma \vdash A}{\Gamma, B \vdash A};
-    \]
-    \item перестановка
-    \[
-        \frac{\Gamma_1, A, B, \Gamma_2 \vdash C}{\Gamma_1, B, A, \Gamma_2 \vdash C};
-    \]
-    \item сокращение
-    \[
-        \frac{\Gamma, A, A \vdash C}{\Gamma, A \vdash C}.
-    \]
+    \item $\dfrac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash B}{\Gamma_1, \Gamma_2 \vdash A \land B}$ (\textit{введение $\land$});
+    \item $\dfrac{\Gamma \vdash A \land B}{\Gamma \vdash A}$ (\textit{удаление $\land$});
+    \item $\dfrac{\Gamma \vdash A \land B}{\Gamma \vdash B}$ (\textit{удаление $\land$});
+    \item $\dfrac{\Gamma \vdash A}{\Gamma \vdash A \lor B}$ (\textit{введение $\lor$});
+    \item $\dfrac{\Gamma \vdash B}{\Gamma \vdash A \lor B}$ (\textit{введение $\lor$});
+    \item $\dfrac{\Gamma_1 \vdash A \lor B;\ \Gamma_2, A \vdash C;\ \Gamma_3, B \vdash C}{\Gamma_1, \Gamma_2, \Gamma_3 \vdash C}$ (\textit{удаление $\lor$});
+    \item $\dfrac{\Gamma, A \vdash B}{\Gamma \vdash A \supset B}$ (\textit{введение $\supset$});
+    \item $\dfrac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash A \supset B}{\Gamma_1, \Gamma_2 \vdash B}$ (\textit{удаление $\supset$});
+    \item $\dfrac{\Gamma, A \vdash}{\Gamma \vdash \neg A}$ (\textit{введение $\neg$});
+    \item $\dfrac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash \neg A}{\Gamma_1, \Gamma_2 \vdash}$ (\textit{сведение к противоречию});
+    \item $\dfrac{\Gamma, \neg A \vdash}{\Gamma \vdash A}$ (\textit{удаление $\neg$});
+    \item $\dfrac{\Gamma \vdash}{\Gamma \vdash A}$ (\textit{утончение});
+    \item $\dfrac{\Gamma \vdash A}{\Gamma, B \vdash A}$ (\textit{расширение});
+    \item $\dfrac{\Gamma_1, A, B, \Gamma_2 \vdash C}{\Gamma_1, B, A, \Gamma_2 \vdash C}$ (\textit{перестановка});
+    \item $\dfrac{\Gamma, A, A \vdash C}{\Gamma, A \vdash C}$ (\textit{сокращение}).
 \end{enumerate}
 
 \subsubsection{Исчисление Клини}
