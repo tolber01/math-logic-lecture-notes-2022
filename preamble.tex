@@ -14,12 +14,13 @@
 \newmdtheoremenv[backgroundcolor = gray!30]{lemma}{Лемма}[subsection]
 \newmdtheoremenv[backgroundcolor = gray!30]{theorem}{Теорема}[subsection]
 \newtheorem*{corollary*}{Следствие}
-\newtheorem{corollary}{Следствие}
+\newtheorem{corollary}{Следствие}[subsubsection]
 \newtheorem{remark}{Замечание}
 \newtheorem*{remark*}{Замечание}
 
 \renewcommand{\thelemma}{\arabic{subsection}.\arabic{lemma}}
 \renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
+\renewcommand{\thecorollary}{\arabic{corollary}}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
