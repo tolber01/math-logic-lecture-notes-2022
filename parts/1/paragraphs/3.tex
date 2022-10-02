@@ -98,7 +98,10 @@
 \end{lemma}
 \begin{proof}\leavevmode
     \begin{enumerate}[label=\arabic*)]
-        \item ??? (\textit{можно вывести из $A, \neg A \vdash B$ и двойного применения теоремы дедукции}).
+        \item Доказывается на основе $A, \neg A \vdash B$ (см. (1) в лемме \ref{th:usefull_theorems}) и применения теоремы дедукции (теорема \ref{th:deduction_th}): 
+        \[
+            A, \neg A \vdash B \Longrightarrow A \vdash \neg A \supset B \Longleftrightarrow A \vdash A \lor B.
+        \]
         \item Запись $B \supset (A \lor B)$ понимается как $B \supset (\neg A \supset B)$, что есть просто аксиома А1.
     \end{enumerate}
 \end{proof}
@@ -111,8 +114,20 @@
 \end{lemma}
 \begin{proof}\leavevmode
     \begin{enumerate}[label=\arabic*)]
-        \item ???.
-        \item ???.
+        \item Данная выводимость расшифровывается как $\neg(A \supset \neg B) \vdash A$. Для доказательства понадобятся результаты лемм \ref{th:negations} и \ref{th:usefull_theorems}, а также теорема дедукции. А именно,
+        \[
+            \neg A, A \vdash \neg B \xRightarrow{\text{т. дедукции}} \neg A \vdash A \supset \neg B \xRightarrow{\text{контрапозиция}} \neg(A \supset \neg B) \vdash \neg\neg A \xRightarrow{\text{удаление }\neg\neg} \neg(A \supset \neg B) \vdash A.
+        \]
+        \item Выводимость $\neg(A \supset \neg B) \vdash B$ поясняется аналогично на основе выводимости $\neg B \vdash A \supset \neg B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\neg B$ (гипотеза);
+            \item $\neg B \supset (A \supset \neg B)$ (А1);
+            \item $A \supset \neg B$ (из 1, 2 по MP).
+        \end{enumerate}
+        Далее получаем
+        \[
+            \neg B \vdash A \supset \neg B \xRightarrow{\text{контрапозиция}} \neg(A \supset \neg B) \vdash \neg\neg B \xRightarrow{\text{удаление }\neg\neg} \neg(A \supset \neg B) \vdash B.
+        \]
     \end{enumerate}
 \end{proof}
 
@@ -175,7 +190,7 @@
 \subsubsection{Теорема дедукции}
 \nobreak\vspace{0.5em}
 \nopagebreak
-\begin{theorem}[\textit{дедукция в ИВ}]
+\begin{theorem}[\textit{дедукция в ИВ}]\label{th:deduction_th}
     Если $\Gamma$ --- множество формул и $\Gamma, A \vdash B$, то $\Gamma \vdash A \supset B$.
 \end{theorem}
 \begin{proof}\leavevmode
