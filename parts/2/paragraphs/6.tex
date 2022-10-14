@@ -1,0 +1,181 @@
+\subsection{Некоторые дополнительные правила вывода в ИП}
+Для упрощения работы с конкретными теориями первого порядка полезно доказать некоторые дополнительные факты о них. Пусть далее $T$~---~произвольная теория первого порядка.
+
+\subsubsection{Правила индивидуализации и существования}
+\textbf{Правило индивидуализации}: если терм $t$ свободен для $x$ в формуле $A(x)$, то $\forall xA(x) \vdash A(t)$.
+\begin{proof}\leavevmode
+    \begin{enumerate}
+        \item $\forall xA(x) \supset A(t)$ (А4, её использование правомерно, так как $t$ свободен для $x$ в $A(x)$);
+        \item $\forall xA(x)$ (гипотеза);
+        \item $A(t)$ (из 2, 1 по MP).
+    \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    Если $A$ и $B$~---~формулы и предметная переменная $x$ не свободна в $A$, то:
+    \begin{enumerate}[label=\arabic*)]
+        \item $\vdash A \supset \forall xA$ (следовательно, по аксиоме А4 получается $\vdash A \equiv \forall xA$);
+        \item $\vdash \exists xA \supset A$ (следовательно, по нижеследующему правилу существования $\vdash \exists xA \equiv A$);
+        \item $\vdash \forall x(A \supset B) \equiv (A \supset \forall xB)$;
+        \item $\vdash \forall x(B \supset A) \equiv (\exists xB \supset A)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}\leavevmode
+    \begin{enumerate}[label=\arabic*)]
+        \item Ясно, что по правилу Gen справедлива выводимость $A \vdash \forall xA$. Так как в данном случае переменная $x$ не свободна в $A$ и она не свяжется квантором $\forall x$, правомерно использование теоремы дедукции, дающее искомое утверждение: $\vdash A \supset \forall xA$.
+
+        \item Формула $\exists xA \supset A$ расшифровывается как $\neg\forall x(\neg A) \supset A$. Докажем вспомогательную выводимость $\neg\forall x(\neg A) \vdash A$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\big(\neg A \supset \neg\forall x(\neg A)\big) \supset \Big(\big(\neg A \supset \forall x(\neg A)\big) \supset A\Big)$ (А3);
+            \item $\neg\forall x(\neg A) \supset \big(\neg A \supset \neg\forall x(\neg A)\big)$ (А1);
+            \item $\neg\forall x(\neg A)$ (гипотеза);
+            \item $\neg A \supset \neg\forall x(\neg A)$ (из 3, 2 по MP);
+            \item $\big(\neg A \supset \forall x(\neg A)\big) \supset A$ (из 5, 1 по MP);
+            \item $\neg A \supset \forall x(\neg A)$ (доказанный п.1: ясно, что если $x$ не свободна в $A$, то $x$ не свободна и в $\neg A$);
+            \item $A$ (из 6, 5 по MP).
+        \end{enumerate}
+        Ясно, что поскольку $x$ не является свободной переменной в $A$, то в данной ситуации также можно применить теорему дедукции и получить требуемое: $\neg\forall x(\neg A) \supset A$, то есть $\exists xA \supset A$.
+
+        \item $\forall x(A \supset B) \supset (A \supset \forall xB)$~---~аксиома А5, поскольку $x$ не свободна в $A$. Докажем вспомогательную выводимость $A \supset \forall xB, A \vdash B$: 
+        \begin{enumerate}[label=\arabic*.]
+            \item $A \supset \forall xB$ (гипотеза);
+            \item $A$ (гипотеза);
+            \item $\forall xB$ (из 2, 1 по MP);
+            \item $\forall xB \supset B$ (А4, её использование законно, так как терм $t = x$ свободен для $x$ в любой формуле);
+            \item $B$ (из 3, 4 по MP).
+        \end{enumerate}
+        Так как в выводе выше ни разу не было использовано правило Gen, можно применить теорему дедукции и получить $A \supset \forall xB \vdash A \supset B$. По правилу Gen получаем, что $A \supset B \vdash \forall x(A \supset B)$, а значит по правилу сечения справедливо $A \supset \forall xB \vdash \forall x(A \supset B)$. \\
+        Ясно, исходя из предыдущих выводов и доказательства теоремы дедукции, что существует вывод $A \supset \forall xB \vdash \forall x(A \supset B)$, в котором правило Gen применяется только к переменной $x$, которая, во-первых, не свободна в $A$, во-вторых, не свободна в $\forall xB$, откуда $x$ не свободна и в $A \supset \forall xB$, а значит мы снова имеем право применить теорему дедукции и получить желанное $\vdash (A \supset \forall xB) \supset \forall x(A \supset B)$. \\
+        Наконец, используя правило конъюнкции, доказываемое чуть дальше, и правило сечения, получаем, что
+        \[
+            \vdash \big(\forall x(A \supset B) \supset (A \supset \forall xB)\big) \land \big((A \supset \forall xB) \supset \forall x(A \supset B)\big),
+        \]
+        что равносильно искомому $\vdash \forall x(A \supset B) \equiv (A \supset \forall xB)$.
+
+        \item \texttt{ToDo...}
+    \end{enumerate}
+\end{proof}
+
+\textbf{Правило существования} (контрапозиция правила индивидуализации): если терм $t$ свободен для $x$ в $A(x)$, то $\vdash A(t) \supset \exists xA(x)$ и, следовательно, $A(t) \vdash \exists xA(x)$.
+\begin{proof}
+    Формула $A(t) \supset \exists xA(x)$ является сокращением записи $A(t) \supset \neg \forall x\big(\neg A(x)\big)$. Предъявим вывод этой формулы:
+    \begin{enumerate}
+        \item $\forall x\big(\neg A(x)\big) \supset \neg A(t)$ (А4, её использование правомерно, так как терм $t$ свободен для $x$ в $A(x)$, а значит и в $\neg A(x)$);
+        \item $(\mathcal{A} \supset \neg \mathcal{B}) \supset (\mathcal{B} \supset \neg \mathcal{A})$ (теорема, являющаяся частным случаем тавтологии по лемме \ref{th:tautology_is_theorem});
+        \item $A(t) \supset \neg\forall x\big(\neg A(x)\big)$ (из 1, 2 по MP, полагая $\mathcal{A} \leftrightharpoons \forall x\big(\neg A(x)\big)$ и $\mathcal{B} \leftrightharpoons A(t)$).
+    \end{enumerate}
+    Так как доказано $A(t) \supset \exists xA(x)$, легко доказать и $A(t) \vdash \exists xA(x)$:
+    \begin{enumerate}
+        \item $A(t)$ (гипотеза);
+        \item $A(t) \supset \exists xA(x)$ (выведенная теорема);
+        \item $\exists xA(x)$ (из 1, 2 по MP).
+    \end{enumerate}
+\end{proof}
+
+\textbf{Правило конъюнкции}: $A, B \vdash A \land B$.
+\begin{proof}Вспомним, что $A \land B$~---~сокращение записи $\neg(A \supset \neg B)$. Тем самым, требуется доказать выводиость $A, B \vdash \neg(A \supset \neg B)$. Доказательство имеет вид:
+    \begin{enumerate}
+        \item $(A \supset B) \supset \big(A \supset \neg(A \supset \neg B)\big)$ (тавтология, являющаяся теоремой по лемме \ref{th:tautology_is_theorem});
+        \item $B$ (гипотеза);
+        \item $B \supset (A \supset B)$ (А1);
+        \item $A \supset B$ (из 2, 3 по MP);
+        \item $A \supset \neg(A \supset \neg B)$ (из 4, 1 по MP);
+        \item $A$ (гипотеза);
+        \item $\neg(A \supset \neg B)$ (из 6, 5 по MP).
+    \end{enumerate}
+\end{proof}
+
+\begin{lemma}\label{th:equivalence_distribution}
+    Для любых формул $A$ и $B$ справедливо $\vdash \forall x(A \equiv B) \supset (\forall xA \equiv \forall xB)$.
+\end{lemma}
+\begin{proof}
+    Вывод $\forall x(A \equiv B), \forall xA \vdash \forall xB$: 
+    \begin{enumerate}
+        \item $\forall x(A \equiv B)$ (гипотеза);
+        \item $\forall xA$ (гипотеза);
+        \item $A \equiv B$ (из 1 по правилу индивидуализации, поскольку терм $t = x$ свободен относительно $x$ в любой формуле);
+        \item $A$ (из 2 по правилу индивидуализации);
+        \item $(A \equiv B) \supset (A \supset B)$ (тавтология, являющаяся теоремой согласно лемме \ref{th:tautology_is_theorem});
+        \item $A \supset B$ (из 3, 5 по MP);
+        \item $B$ (из 4, 6 по MP);
+        \item $\forall xB$ (из 7 по Gen).
+    \end{enumerate}
+    Далее по теореме дедукции $\forall x(A \equiv B) \vdash \forall xA \supset \forall xB$. Аналогично доказывается $\forall x(A \equiv B) \vdash \forall xB \supset \forall xA$. По правилу конъюнкции и правилу сечения получаем $\forall x(A \equiv B) \vdash \forall xA \equiv \forall xB$. Теперь по теореме дедукции приходим к доказываемому утверждению.
+\end{proof}
+
+\subsubsection{Теорема эквивалентности}
+\begin{theorem}[\textit{теорема эквивалентности}]
+    Если $B$ есть подформула $A$ и $A'$ есть результат замены каких-либо (может быть, ни одного) вхождений $B$ формулой $C$ и если всякая свободная переменная формулы $B$ или $C$, являющаяся одновременно связанной переменной формулы $A$, встречается в списке $y_1, y_2, \dots, y_k$, то
+    \[
+        \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (A \equiv A').
+    \]
+\end{theorem}
+\begin{proof}
+    Рассмотрим тривиальные случаи:
+    \begin{itemize}
+        \item Пусть ни одно вхождение $B$ не заменяется на $C$. Тогда $A'$ просто совпадает с $A$. Требуется в таком случае доказать, что
+        \[
+            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (A \equiv A).
+        \]
+        Упомянутая теорема имеет вид $D \supset (A \equiv A)$, где $D \leftrightharpoons \forall y_1\forall y_2\dots\forall y_k(B \equiv C)$. Ясно, что это тавтология, откуда по лемме \ref{th:tautology_is_theorem} она является теоремой ИП.
+        
+        \item Пусть теперь $B$ совпадает с $A$ и это единственное вхождение заменяется на $C$. Тогда надо доказать
+        \[
+            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (B \equiv C).
+        \]
+        Это следует из более общего утверждения: $\vdash \forall y_1\forall y_2\dots\forall y_k\mathcal{A} \supset \mathcal{A}$, следующего, в свою очередь, по индукции из правила индивидуализации. Взяв вместо $\mathcal{A}$ формулу $B \equiv C$, получаем требуемое.
+    \end{itemize}
+
+    Далее считаем, что хотя бы одно вхождение $B$ заменяется, и $B$ не совпадает с $A$ (то есть $B$~---~собственная подформула $A$).
+    
+    Доказательство проведём индукцией по числу связок и кванторов в формуле $A$.
+
+    \textbf{База}: в $A$ одна связка или один квантор. Имеются варианты:
+    \begin{itemize}
+        \item \underline{В $A$ всего один квантор всеобщности}. Иными словами, $A$ имеет вид $\forall xP$, где $P$~---~элементарная формула. \\
+        Единственная собственная подформула $A$, как легко видеть, есть $P$, а значит $P$ совпадает с $B$. Следовательно, $A'$ имеет вид $\forall xC$. Тогда нужно доказать $\vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (\forall xB \equiv \forall xC)$. \\
+        Ясно, что поскольку $x$ является связанной переменной в $A$, то она входит в список $y_1, y_2, \dots, y_k$. Пусть $x$ есть $y_i$. В таком случае от нас требуется доказать, что
+        \begin{equation}\label{eq:base_1}
+            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (\forall y_iB \equiv \forall y_iC).
+        \end{equation}
+        Многократно используя доказанное в \ref{par:deduction_th} утверждение $\forall x\forall yA(x, y) \vdash \forall y\forall xA(x, y)$, мы можем получить (\ref{eq:base_1}) из выводимости
+        \begin{equation}\label{eq:base_2}
+            \vdash \forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C) \supset (\forall y_iB \equiv \forall y_iC). 
+        \end{equation}
+        Согласно лемме \ref{th:equivalence_distribution}, справедливо $\vdash \forall y_i(B \equiv C) \supset (\forall y_iB \equiv \forall y_iC)$, а значит имеет место 
+        \begin{equation}\label{eq:base_3}
+            \forall y_i(B \equiv C) \vdash \forall y_iB \equiv \forall y_iC.
+        \end{equation} 
+        Согласно уже упомянутому обобщённому правилу индивидуализации, имеем 
+        \begin{equation}\label{eq:base_4}
+            \forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C) \vdash \forall y_i(B \equiv C). 
+        \end{equation}
+        Тогда по правилу сечения из (\ref{eq:base_3}) и (\ref{eq:base_4}) получаем $\forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C) \vdash \forall y_iB \equiv \forall y_iC$. Из полученной выводимости по теореме дедукции получаем (\ref{eq:base_2}), а из (\ref{eq:base_2}), как было уже замечено, получаем искомое (\ref{eq:base_1}). Законность применения теоремы дедукции здесь обусловлена тем, при выводе правило Gen применялось только к переменным $y_1, y_2, \dots, y_k$, которые, с одной стороны, не свободны в $A$, и, с другой стороны, не свободны в $\forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C)$.
+
+        \item \underline{В $A$ есть одна связка и только она}, то есть $A$ имеет вид $\neg P$ или $P \supset Q$, где $P, Q$~---~элементарные формулы. Рассмотрим два этих подслучая отдельно:
+        \begin{itemize}
+            \item \underline{$A$ имеет вид $\neg P$}, тогда $P$ совпадает с $B$, а $A'$ есть $\neg C$. Фактически требуется доказать, что
+            \begin{equation}\label{eq:base_5}
+                \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (\neg B \equiv \neg C).
+            \end{equation}
+            Применяя обобщённое правило индивидуализации, получаем, что 
+            \begin{equation}\label{eq:base_6}
+                \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash B \equiv C. 
+            \end{equation}
+            Записав далее очевидную тавтологию $(B \equiv C) \supset (\neg B \equiv \neg C)$, из которой вытекает $B \equiv C \vdash \neg B \equiv \neg C$, по правилу сечения из (\ref{eq:base_6}) и последовавшей из написанной тавтологии выводимости получаем, что
+            \begin{equation}\label{eq:base_7}
+                \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash \neg B \equiv \neg C.
+            \end{equation}
+            Желанное (\ref{eq:base_5}) вытекает из (\ref{eq:base_7}) по теореме дедукции (правомерность её использования такая же, как в случае, когда $A$ имеет вид $\forall xP$).
+
+            \item \underline{$A$ имеет вид $P \supset Q$}, где либо $P$ совпадает с $B$, либо $Q$ совпадает с $B$, либо выполнено и то, и другое. Доказательство для этого подслучая такое же, как для предудщего подслучая, только в качестве тавтологий нужно рассмотреть соответственно $(B \equiv C) \supset \big((B \supset Q) \equiv (C \supset Q)\big)$, $(B \equiv C) \supset \big((P \supset B) \equiv (P \supset C)\big)$ и $(B \equiv C) \supset \big((B \supset B) \equiv (C \supset C)\big)$.
+        \end{itemize}
+    \end{itemize}
+
+    Тем самым, проверена база индукции.
+
+    \textbf{Предположение индукции}: пусть теорема верна для любой формулы с меньшим числом связок и кванторов, чем в $A$.
+
+    \textbf{Индукционный шаг}: докажем теорему для самой формулы $A$. Возможны случаи: $A$~---~атомарная формула, тогда $B$ не может быть собственной подформулой $A$, а этот случай уже рассмотрен; $A$ есть $\neg D$, значит $A'$ есть $\neg D'$, где $D'$~---~результат замены (как минимум одного) вхождений $B$ на $C$ \dots \textit{to be continued} \dots
+
+\end{proof}
