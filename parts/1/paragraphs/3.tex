@@ -116,7 +116,7 @@
     \begin{enumerate}[label=\arabic*)]
         \item Данная выводимость расшифровывается как $\neg(A \supset \neg B) \vdash A$. Для доказательства понадобятся результаты лемм \ref{th:negations} и \ref{th:usefull_theorems}, а также теорема дедукции. А именно,
         \[
-            \neg A, A \vdash \neg B \xRightarrow{\text{т. дедукции}} \neg A \vdash A \supset \neg B \xRightarrow{\text{контрапозиция}} \neg(A \supset \neg B) \vdash \neg\neg A \xRightarrow{\text{удаление }\neg\neg} \neg(A \supset \neg B) \vdash A.
+            \neg A, A \vdash \neg B \xRightarrow{\text{т. дедукции}} \neg A \vdash A \supset \neg B \xRightarrow{\text{контрапозиция}} \neg(A \supset \neg B) \vdash \neg\neg A \xRightarrow{\substack{\neg\neg A \vdash A, \\ \text{правило сечения}}} \neg(A \supset \neg B) \vdash A.
         \]
         \item Выводимость $\neg(A \supset \neg B) \vdash B$ поясняется аналогично на основе выводимости $\neg B \vdash A \supset \neg B$:
         \begin{enumerate}[label=\arabic*.]
@@ -126,7 +126,7 @@
         \end{enumerate}
         Далее получаем
         \[
-            \neg B \vdash A \supset \neg B \xRightarrow{\text{контрапозиция}} \neg(A \supset \neg B) \vdash \neg\neg B \xRightarrow{\text{удаление }\neg\neg} \neg(A \supset \neg B) \vdash B.
+            \neg B \vdash A \supset \neg B \xRightarrow{\text{контрапозиция}} \neg(A \supset \neg B) \vdash \neg\neg B \xRightarrow{\substack{\neg\neg B \vdash B, \\ \text{правило сечения}}} \neg(A \supset \neg B) \vdash B.
         \]
     \end{enumerate}
 \end{proof}
@@ -277,7 +277,7 @@
         \end{enumerate}
         Теперь дважды применяем теорему дедукции и получаем искомую выводимость.
 
-        \item Доказательство $\neg B \supset \neg A,\ A \supset B$:
+        \item Доказательство $\neg B \supset \neg A,\ A \vdash B$:
         \begin{enumerate}[label=\arabic*.]
             \item $\neg B \supset \neg A$ (гипотеза);
             \item $A$ (гипотеза);
