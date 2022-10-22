@@ -192,11 +192,11 @@
         \end{equation}
         Из (\ref{eq:step_1}) и (\ref{eq:step_2}) по правилу сечения можно заключить, что
         \[
-            \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash \neg P \equiv \neg P' \Longleftrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash A \equiv A.
+            \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash \neg P \equiv \neg P' \Longleftrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash A \equiv A'.
         \]
         Искомая выводимость получается из предыдущей примененим теоремы дедукции:
         \[
-            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (A \equiv A).
+            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (A \equiv A').
         \]
         Правомерность применения теоремы дедукции обосновывается тем, что, согласно нашему доказательству, правило Gen использовалось только к переменным из списка $y_1, y_2, \dots, y_k$ (свободные переменные $B \equiv C$), а они, как видно в выводимости выше, уже связаны кванторами.
 
