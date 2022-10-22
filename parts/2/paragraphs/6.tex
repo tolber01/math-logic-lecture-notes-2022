@@ -174,8 +174,74 @@
 
     Тем самым, проверена база индукции.
 
-    \textbf{Предположение индукции}: пусть теорема верна для любой формулы с меньшим числом связок и кванторов, чем в $A$.
+    \textbf{Предположение индукции}: пусть теорема верна для любой формулы с меньшим числом связок и кванторов, чем в $A$. 
 
-    \textbf{Индукционный шаг}: докажем теорему для самой формулы $A$. Возможны случаи: $A$~---~атомарная формула, тогда $B$ не может быть собственной подформулой $A$, а этот случай уже рассмотрен; $A$ есть $\neg D$, значит $A'$ есть $\neg D'$, где $D'$~---~результат замены (как минимум одного) вхождений $B$ на $C$ \dots \textit{to be continued} \dots
+    \textbf{Шаг индукции}: докажем утверждение для $A$. Ясно, что $A$ не может быть атомарной формулой, поскольку тогда $A$ не имела бы собственных подформул, среди которых по нашему предположению есть $B$. В таком случае имеются следующие варианты:
+    \begin{itemize}
+        \item \underline{$A$ есть $\neg P$}. Тогда $A'$ есть $\neg P'$, где $P'$~---~результат подстановки в $P$ некоторого числа (как минимум одной) формул $C$ вместо вхождений подформулы $B$. Ясно, что в $P$ содержится меньше связок и кванторов, чем в $A$, тогда для $P$ применимо индукционное предположение:
+        \begin{equation}\label{eq:step_1}
+            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (P \equiv P') \Longrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash P \equiv P'.
+        \end{equation}
+        Имея в виду тавтологию
+        \[
+            (\mathcal{A} \equiv \mathcal{B}) \supset (\neg \mathcal{A} \equiv \neg \mathcal{B}),
+        \]
+        являющуюся теоремой согласно лемме \ref{th:tautology_is_theorem}, можем получить следующее:
+        \begin{equation}\label{eq:step_2}
+            \vdash (P \equiv P') \supset (\neg P \equiv \neg P') \Longrightarrow\ P \equiv P' \vdash \neg P \equiv \neg P'.
+        \end{equation}
+        Из (\ref{eq:step_1}) и (\ref{eq:step_2}) по правилу сечения можно заключить, что
+        \[
+            \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash \neg P \equiv \neg P' \Longleftrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash A \equiv A.
+        \]
+        Искомая выводимость получается из предыдущей примененим теоремы дедукции:
+        \[
+            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (A \equiv A).
+        \]
+        Правомерность применения теоремы дедукции обосновывается тем, что, согласно нашему доказательству, правило Gen использовалось только к переменным из списка $y_1, y_2, \dots, y_k$ (свободные переменные $B \equiv C$), а они, как видно в выводимости выше, уже связаны кванторами.
 
+        \item \underline{$A$ есть $P \supset Q$}. Тогда $A'$ имеет вид $P' \supset Q'$, где $P', Q'$~---~результаты замены некоторых (как минимум одного) вхождений $B$ на $C$ в $P$ и $Q$ соответственно. Ясно, что в $P$ и $Q$ меньше связок и кванторов, чем в $A$. Тогда для этих формул применимо предположение индукции:
+        \begin{equation}\label{eq:step_3}
+            \begin{cases}
+                \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (P \equiv P') \Longrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash P \equiv P', \\
+                \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (Q \equiv Q') \Longrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash Q \equiv Q'.
+            \end{cases}
+        \end{equation}
+        Запишем следующую тавтологию:
+        \[
+            (\mathcal{A} \equiv \mathcal{B}) \land (\mathcal{C} \equiv \mathcal{D}) \supset \big((\mathcal{A} \supset \mathcal{C}) \equiv (\mathcal{B} \supset \mathcal{D})\big).
+        \]
+        Пользуясь этой тавтологией и леммой \ref{th:tautology_is_theorem}, получаем следующее:
+        \begin{equation}\label{eq:step_4}
+            \vdash (P \equiv P') \land (Q \equiv Q') \supset \big((P \supset Q) \equiv (P' \supset Q')\big) \Longrightarrow (P \equiv P') \land (Q \equiv Q') \vdash (P \supset Q) \equiv (P' \supset Q').
+        \end{equation}
+        Теперь по правилу конъюнкции из (\ref{eq:step_3}) получаем выводимость:
+        \begin{equation}\label{eq:step_5}
+            \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash (P \equiv P') \land (Q \equiv Q').
+        \end{equation}
+        Далее из (\ref{eq:step_5}) и (\ref{eq:step_4}) и правила сечения заключаем
+        \[
+            \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash (P \supset Q) \equiv (P' \supset Q') \Longleftrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash A \equiv A'.
+        \]
+        Теорема дедукции, применённая к полученной выше выводимости, даёт нужное утверждение. Правомерность применения теоремы дедукции обосновывается так же, как в предыдущем пункте.
+
+        \item \underline{$A$ имеет вид $\forall x_iP$}. Тогда $A'$ есть $\forall x_iP'$, где $P'$~---~результат замены некоторых вхождений $B$ на $C$ в формуле $P$. Ясно, что в $P$ на один квантор меньше, чем в $A$, значит для $P$ справедливо индукционное предположение:
+        \begin{equation}\label{eq:step_6}
+            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (P \equiv P') \Longrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash P \equiv P'.
+        \end{equation}
+        Требуется показать, что
+        \[
+            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (\forall x_iP \equiv \forall x_iP').
+        \]
+        Отметим, что переменная $x_i$ не встречается свободно в $\forall y_1\forall y_2\dots\forall y_k(B \equiv C)$. Если бы она входила свободно в эту формулу, то она была бы свободной переменной $B$ или $C$, но $x_i$ одновременно с этим является связанной переменной в формуле $A$, а значит $x_i$ входит в список $y_1, y_2, \dots, y_k$, согласно условию теоремы. Это значит, что она была бы связана в $\forall y_1\forall y_2\dots\forall y_k(B \equiv C)$. \\
+        Далее по правилу Gen $P \equiv P' \vdash \forall x_i(P \equiv P')$, что из леммы \ref{th:equivalence_distribution}, правила сечения и (\ref{eq:step_6}) даёт
+        \[
+            \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash \forall x_iP \equiv \forall x_iP' \Longleftrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash A \equiv A'.
+        \]
+        Поскольку правило обобщения здесь применялось к $x_i$, которая не является свободной в $\forall y_1\forall y_2\dots\forall y_k(B \equiv C)$, то можно применить теорему дедукции и заключить желаемое:
+        \[
+            \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (A \equiv A').
+        \]
+    \end{itemize}
+    Итак, все случаи разобраны, а значит индукционный шаг доказан. Тем самым, индукцией по числу связок и кванторов в формуле $A$ доказана требуемая теорема.
 \end{proof}
