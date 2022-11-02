@@ -11,7 +11,7 @@
     \end{enumerate}
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{th:exists_theorems}
     Если $A$ и $B$~---~формулы и предметная переменная $x$ не свободна в $A$, то:
     \begin{enumerate}[label=\arabic*)]
         \item $\vdash A \supset \forall xA$ (следовательно, по аксиоме А4 получается $\vdash A \equiv \forall xA$);
@@ -75,13 +75,11 @@
 \textbf{Правило конъюнкции}: $A, B \vdash A \land B$.
 \begin{proof}Вспомним, что $A \land B$~---~сокращение записи $\neg(A \supset \neg B)$. Тем самым, требуется доказать выводиость $A, B \vdash \neg(A \supset \neg B)$. Доказательство имеет вид:
     \begin{enumerate}
-        \item $(A \supset B) \supset \big(A \supset \neg(A \supset \neg B)\big)$ (тавтология, являющаяся теоремой по лемме \ref{th:tautology_is_theorem});
-        \item $B$ (гипотеза);
-        \item $B \supset (A \supset B)$ (А1);
-        \item $A \supset B$ (из 2, 3 по MP);
-        \item $A \supset \neg(A \supset \neg B)$ (из 4, 1 по MP);
         \item $A$ (гипотеза);
-        \item $\neg(A \supset \neg B)$ (из 6, 5 по MP).
+        \item $B$ (гипотеза);
+        \item $A \supset \big(B \supset \neg(A \supset \neg B)\big)$ (тавтология, являющаяся теоремой по лемме \ref{th:tautology_is_theorem});
+        \item $B \supset \neg(A \supset \neg B)$ (из 1, 3 по MP);
+        \item $\neg(A \supset \neg B)$ (из 2, 4 по MP).
     \end{enumerate}
 \end{proof}
 
@@ -245,3 +243,137 @@
     \end{itemize}
     Итак, все случаи разобраны, а значит индукционный шаг доказан. Тем самым, индукцией по числу связок и кванторов в формуле $A$ доказана требуемая теорема.
 \end{proof}
+\begin{corollary}[\textit{теорема о замене}]
+    Пусть формулы $A, B, C$ и $A'$ удовлетворяют условию теоремы эквивалентности. Тогда:
+    \begin{enumerate}
+        \item Если $\vdash B \equiv C$, то $\vdash A \equiv A'$.
+        \item Если $\vdash B \equiv C$ и $\vdash A$, то $\vdash A'$.
+    \end{enumerate}
+\end{corollary}
+\begin{definition*}
+    Формулы $A(x_i)$ и $A(x_j)$ (переменные $x_i$ и $x_j$ не совпадают, $A(x_j)$ получается из $A(x_i)$ подстановкой $x_j$ вместо всех свободных вхождений $x_i$) называются \textit{подобными}, если $x_j$ свободна для $x_i$ в $A(x_i)$ и $A(x_j)$ не имеет свободных вхождений $x_j$.
+\end{definition*}
+
+Если $A(x_i)$ и $A(x_j)$ подобны, то $x_i$ свободна для $x_j$ в $A(x_j)$, и $A(x_j)$ не имеет свободных вхождений $x_i$. Таким образом, подобие формул симметрично. Следовательно, $A(x_i)$ и $A(x_j)$ подобны тогда и только тогда, когда $A(x_j)$ имеет свободные вхождения $x_j$ в точности в тех местах, в которых $A(x_i)$ имеет свободные вхождения $x_i$.
+\begin{lemma}
+    Если формулы $A(x_i)$ и $A(x_j)$ подобны, то $\vdash \forall x_iA(x_i) \equiv \forall x_jA(x_j)$.
+\end{lemma}
+\begin{corollary}[\textit{переименование связанных переменных}]
+    Если $\forall xB(x)$ есть подформула формулы $A$, формула $B(y)$ подобна $B(x)$ и $A'$ есть результат замены по крайней мере одного вхождения $\forall xB(x)$ в $A$ на $\forall yB(y)$, то $\vdash A \equiv A'$.
+\end{corollary}
+
+\subsubsection{Правило C}
+Пусть надо доказать $\exists x\big(B(x) \supset C(x)\big), \forall xB(x) \vdash \exists xC(x)$. \\
+\textbf{Интуитивное доказательство}:
+\begin{enumerate}
+    \item $\exists x\big(B(x) \supset C(x)\big)$ (гипотеза);
+    \item $\forall xB(x)$ (гипотеза);
+    \item $\color{red}B(a) \supset C(a)$ (из 1, выбор некоторого $a$);
+    \item $B(a)$ (из 2, по правилу индивидуализации, терм $t = a$ свободен для любой переменной в любой формуле);
+    \item $C(a)$ (из 4, 3 по MP);
+    \item $\exists xC(x)$ (из 5 по правилу существования).
+\end{enumerate}
+Можно то же самое доказать \textbf{без произвольного выбора} элемента на шаге 3. \\
+Построим вывод $\forall xB(x), \forall x\neg C(x) \vdash \forall x\neg\big(B(x) \supset C(x)\big)$:
+\begin{enumerate}
+    \item $\forall xB(x)$ (гипотеза);
+    \item $\forall x\neg C(x)$ (гипотезы);
+    \item $B(x)$ (из 1 по правилу индивидуализации);
+    \item $\neg C(x)$ (из 2 по правилу индивидуализации);
+    \item $B(x) \land \neg C(x)$ (из 3, 4 по правилу конъюнкции);
+    \item $B(x) \land \neg C(x) \supset \neg\big(B(x) \supset C(x)\big)$ (частный случай тавтологии $\mathcal{A} \land \neg \mathcal{B} \supset \neg(\mathcal{A} \supset \mathcal{B})$);
+    \item $\neg\big(B(x) \supset C(x)\big)$ (из 5, 6 по MP);
+    \item $\forall x\neg\big(B(x) \supset C(x)\big)$ (из 7 по Gen).
+\end{enumerate}
+По теореме дедукции получаем
+\[
+    \forall xB(x) \vdash \forall x\neg C(x) \supset \forall x\neg\big(B(x) \supset C(x)\big).
+\]
+Отсюда с помощью тавтологии $(\mathcal{A} \supset \mathcal{B}) \supset (\neg \mathcal{B} \supset \neg \mathcal{A})$ по правилу MP имеем
+\[
+    \forall xB(x) \vdash \exists x\big(B(x) \supset C(x)\big) \supset \exists xC(x).
+\]
+Отсюда можно получить 
+\[
+    \exists x\big(B(x) \supset C(x)\big), \forall xB(x) \vdash \exists xC(x).
+\]
+Правило C (choice) позволяет переходить от $\exists xA(x)$ к $A(a)$.
+
+\textbf{Вывод с применением правила C}. \\
+$\Gamma \vdash_C A$ тогда и только тогда, когда существует вывод $B_1, B_2, \dots, B_n$ формулы $A$, в котором:
+\begin{enumerate}
+    \item Для любого $i$ формула $B_i$ есть либо аксиома, либо гипотеза из $\Gamma$, либо непосредственное следствие по MP или Gen из каких-либо предшествующих формул, либо $C(b)$, где $b$~---~новая предметная константа, и формуле $B_i$ предшествует формула $\exists xC(x)$ (правило C).
+    \item В качестве аксиом в 1 допускаются также всевозможные логические аксиомы с новыми предметными константами, уже введёнными ранее по правилу C.
+    \item Не допускается применение правила Gen по переменным, свободным хотя бы в одной формуле вида $\exists xC(x)$, к которой ранее было применено правило C.
+    \item Формула $A$ не содержит новых предметных констант, введённых с помощью правила C.
+\end{enumerate}
+Пример вывода с применением правила C без п.3:
+\[
+    \forall x\exists yA_1^2(x, y) \vdash_C \exists y\forall xA_1^2(x, y):
+\]
+\begin{enumerate}
+    \item $\forall x\exists yA_1^2(x, y)$ (гипотеза);
+    \item $\exists yA_1^2(x, y)$ (из 1 по индивидуализации);
+    \item $A_1^2(x, b)$ (из 2 по правилу C);
+    \item $\forall xA_1^2(x, b)$ (из 3 по правилу Gen);
+    \item $\exists y\forall xA_1^2(x, y)$ (из 4 по правилу существования).
+\end{enumerate}
+\begin{theorem}\label{th:c_rule_inference}
+    Если $\Gamma \vdash_C A$, то $\Gamma \vdash A$.
+\end{theorem}
+\begin{proof}
+    Пусть $\exists y_1C_1(y_1), \dots, \exists y_kC_k(y_k)$~---~формулы (в порядке появления) в выводе $\Gamma \vdash_C A$, к которым применено правило C, а $a_1, a_2, \dots, a_k$~---~вводимые при этом новые предметные константы. Тогда 
+    \[
+        \Gamma, C_1(a_1), C_2(a_2), \dots, C_k(a_k) \vdash A.
+    \]
+    Применим теорему дедукции (что законно в силу п.3 в выводе с примененим правила C), получив в результате 
+    \[
+        \Gamma, C_1(a_1), C_2(a_2), \dots, C_{k - 1}(a_{k - 1}) \vdash C_k(a_k) \supset A.
+    \]
+    Заменим в полученном выводе все вхождения константы $a_k$ на переменную $z$, не встречающуюся в этом выводе, и получим
+    \[
+        \Gamma, C_1(a_1), C_2(a_2), \dots, C_{k - 1}(a_{k - 1}) \vdash C_k(z) \supset A.
+    \]
+    К полученному выводу применим правило обобщения и заключим
+    \[
+        \Gamma, C_1(a_1), C_2(a_2), \dots, C_{k - 1}(a_{k - 1}) \vdash \forall z\big(C_k(z) \supset A\big).
+    \]
+    Из леммы \ref{th:exists_theorems} (п.4) вытекает следующее: $\forall x(B \supset A) \vdash \exists xB \supset A$. Из этого заключаем, что
+    \[
+        \Gamma, C_1(a_1), C_2(a_2), \dots, C_{k - 1}(a_{k - 1}) \vdash \exists zC_k(z) \supset A
+    \]
+    Далее применяя правило переименования связанных переменных, получаем
+    \[
+        \Gamma, C_1(a_1), C_2(a_2), \dots, C_{k - 1}(a_{k - 1}) \vdash \exists y_kC_k(y_k) \supset A.
+    \]
+    Затем учтём, что поскольку формула $\exists y_kC_k(y_k)$ уже встречалась в выводе, то 
+    \[
+        \Gamma, C_1(a_1), C_2(a_2), \dots, C_{k - 1}(a_{k - 1}) \vdash \exists y_kC_k(y_k),
+    \]
+    тогда по правилу MP и правилу сечения получаем
+    \[
+        \Gamma, C_1(a_1), C_2(a_2), \dots, C_{k - 1}(a_{k - 1}) \vdash A.
+    \]
+    По аналогии избавляемся от $C_{k - 1}(a_{k - 1}), C_{k - 2}(a_{k - 2}), \dots, C_1(a_1)$ и получаем требуемую выводимость:
+    \[
+        \Gamma \vdash A.
+    \]
+\end{proof}
+\textbf{Пример}: $\vdash \forall x\big(A(x) \supset B(x)\big) \supset \big(\exists xA(x) \supset \exists xB(x)\big)$. \\
+Вывод $\forall x\big(A(x) \supset B(x)\big), \exists xA(x) \vdash_C \exists xB(x)$:
+\begin{enumerate}
+    \item $\forall x\big(A(x) \supset B(x)\big)$ (гипотеза);
+    \item $\exists xA(x)$ (гипотеза);
+    \item $A(b)$ (из 2 по правилу C);
+    \item $A(b) \supset B(b)$ (из 1 по правилу индивидуализации);
+    \item $B(b)$ (из 3, 4 по MP);
+    \item $\exists xB(x)$ (из 5 по правилу существования).
+\end{enumerate}
+Тогда по теореме \ref{th:c_rule_inference} имеет место
+\[
+    \forall x\big(A(x) \supset B(x)\big), \exists xA(x) \vdash \exists xB(x).
+\]
+Дважды применяя теорему дедукции, получаем требуемое:
+\[
+    \vdash \forall x\big(A(x) \supset B(x)\big) \supset \big(\exists xA(x) \supset \exists xB(x)\big).
+\]
