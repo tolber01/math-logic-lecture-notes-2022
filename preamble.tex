@@ -22,6 +22,10 @@
 \renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}
 \renewcommand{\thecorollary}{\arabic{corollary}}
 
+\usepackage{chngcntr}
+\counterwithin*{equation}{lemma}
+\counterwithin*{equation}{theorem}
+
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
 \usepackage[left=1.25cm, right=1.25cm, top=1.5cm, bottom=2cm]{geometry}

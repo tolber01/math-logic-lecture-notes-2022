@@ -136,7 +136,7 @@
         \begin{equation}\label{eq:base_1}
             \vdash \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \supset (\forall y_iB \equiv \forall y_iC).
         \end{equation}
-        Многократно используя доказанное в \ref{par:deduction_th} утверждение $\forall x\forall yA(x, y) \vdash \forall y\forall xA(x, y)$, мы можем получить (\ref{eq:base_1}) из выводимости
+        Многократно используя доказанное в \ref{par:deduction_th} утверждение $\forall x\forall yA(x, y) \vdash \forall y\forall xA(x, y)$, мы можем получить \eqref{eq:base_1} из выводимости
         \begin{equation}\label{eq:base_2}
             \vdash \forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C) \supset (\forall y_iB \equiv \forall y_iC). 
         \end{equation}
@@ -148,7 +148,7 @@
         \begin{equation}\label{eq:base_4}
             \forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C) \vdash \forall y_i(B \equiv C). 
         \end{equation}
-        Тогда по правилу сечения из (\ref{eq:base_3}) и (\ref{eq:base_4}) получаем $\forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C) \vdash \forall y_iB \equiv \forall y_iC$. Из полученной выводимости по теореме дедукции получаем (\ref{eq:base_2}), а из (\ref{eq:base_2}), как было уже замечено, получаем искомое (\ref{eq:base_1}). Законность применения теоремы дедукции здесь обусловлена тем, при выводе правило Gen применялось только к переменным $y_1, y_2, \dots, y_k$, которые, с одной стороны, не свободны в $A$, и, с другой стороны, не свободны в $\forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C)$.
+        Тогда по правилу сечения из \eqref{eq:base_3} и \eqref{eq:base_4} получаем $\forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C) \vdash \forall y_iB \equiv \forall y_iC$. Из полученной выводимости по теореме дедукции получаем \eqref{eq:base_2}, а из \eqref{eq:base_2}, как было уже замечено, получаем искомое \eqref{eq:base_1}. Законность применения теоремы дедукции здесь обусловлена тем, при выводе правило Gen применялось только к переменным $y_1, y_2, \dots, y_k$, которые, с одной стороны, не свободны в $A$, и, с другой стороны, не свободны в $\forall y_1\forall y_2\dots\forall y_{i - 1}\forall y_{i + 1}\dots\forall y_k\forall y_i(B \equiv C)$.
 
         \item \underline{В $A$ есть одна связка и только она}, то есть $A$ имеет вид $\neg P$ или $P \supset Q$, где $P, Q$~---~элементарные формулы. Рассмотрим два этих подслучая отдельно:
         \begin{itemize}
@@ -160,11 +160,11 @@
             \begin{equation}\label{eq:base_6}
                 \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash B \equiv C. 
             \end{equation}
-            Записав далее очевидную тавтологию $(B \equiv C) \supset (\neg B \equiv \neg C)$, из которой вытекает $B \equiv C \vdash \neg B \equiv \neg C$, по правилу сечения из (\ref{eq:base_6}) и последовавшей из написанной тавтологии выводимости получаем, что
+            Записав далее очевидную тавтологию $(B \equiv C) \supset (\neg B \equiv \neg C)$, из которой вытекает $B \equiv C \vdash \neg B \equiv \neg C$, по правилу сечения из \eqref{eq:base_6} и последовавшей из написанной тавтологии выводимости получаем, что
             \begin{equation}\label{eq:base_7}
                 \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash \neg B \equiv \neg C.
             \end{equation}
-            Желанное (\ref{eq:base_5}) вытекает из (\ref{eq:base_7}) по теореме дедукции (правомерность её использования такая же, как в случае, когда $A$ имеет вид $\forall xP$).
+            Желанное \eqref{eq:base_5} вытекает из \eqref{eq:base_7} по теореме дедукции (правомерность её использования такая же, как в случае, когда $A$ имеет вид $\forall xP$).
 
             \item \underline{$A$ имеет вид $P \supset Q$}, где либо $P$ совпадает с $B$, либо $Q$ совпадает с $B$, либо выполнено и то, и другое. Доказательство для этого подслучая такое же, как для предудщего подслучая, только в качестве тавтологий нужно рассмотреть соответственно $(B \equiv C) \supset \big((B \supset Q) \equiv (C \supset Q)\big)$, $(B \equiv C) \supset \big((P \supset B) \equiv (P \supset C)\big)$ и $(B \equiv C) \supset \big((B \supset B) \equiv (C \supset C)\big)$.
         \end{itemize}
@@ -188,7 +188,7 @@
         \begin{equation}\label{eq:step_2}
             \vdash (P \equiv P') \supset (\neg P \equiv \neg P') \Longrightarrow\ P \equiv P' \vdash \neg P \equiv \neg P'.
         \end{equation}
-        Из (\ref{eq:step_1}) и (\ref{eq:step_2}) по правилу сечения можно заключить, что
+        Из \eqref{eq:step_1} и \eqref{eq:step_2} по правилу сечения можно заключить, что
         \[
             \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash \neg P \equiv \neg P' \Longleftrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash A \equiv A'.
         \]
@@ -213,11 +213,11 @@
         \begin{equation}\label{eq:step_4}
             \vdash (P \equiv P') \land (Q \equiv Q') \supset \big((P \supset Q) \equiv (P' \supset Q')\big) \Longrightarrow (P \equiv P') \land (Q \equiv Q') \vdash (P \supset Q) \equiv (P' \supset Q').
         \end{equation}
-        Теперь по правилу конъюнкции из (\ref{eq:step_3}) получаем выводимость:
+        Теперь по правилу конъюнкции из \eqref{eq:step_3} получаем выводимость:
         \begin{equation}\label{eq:step_5}
             \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash (P \equiv P') \land (Q \equiv Q').
         \end{equation}
-        Далее из (\ref{eq:step_5}) и (\ref{eq:step_4}) и правила сечения заключаем
+        Далее из \eqref{eq:step_5} и \eqref{eq:step_4} и правила сечения заключаем
         \[
             \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash (P \supset Q) \equiv (P' \supset Q') \Longleftrightarrow \forall y_1\forall y_2\dots\forall y_k(B \equiv C) \vdash A \equiv A'.
         \]
