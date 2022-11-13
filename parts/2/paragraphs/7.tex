@@ -58,7 +58,7 @@
 
     \textbf{Индукционный шаг}: докажем утверждение для случая числа связок и кванторов, равного $n$. Имеют место три случая: $A$ есть $P \supset Q$ или $A$ есть $\neg P$, или $A$ есть $\forall x_iP$, где $P, Q$~---~формулы с меньшим числом связок и кванторов, чем в $A$. Рассмотрим детально эти случаи:
     \begin{enumerate}
-        \item \underline{$A(x_1, x_1) \leftrightharpoons \neg P(x_1, x_1)$}. Далее через $P(x_1, x_1)$ будем обозначать результат замены некоторых (необязательно всех) свободных вхождений $x_2$ на $x_1$. Для $P(x_1, x_1)$ верно индукионное предположение:
+        \item \underline{$A(x_1, x_1) \leftrightharpoons \neg P(x_1, x_1)$}. Далее через $P(x_1, x_1)$ будем обозначать результат замены некоторых (необязательно всех) свободных вхождений $x_2$ в $P$ на $x_1$. Для $P(x_1, x_1)$ верно индукионное предположение:
         \begin{equation}\label{eq:step_1}
             \vdash x_2 = x_1 \supset \big(P(x_1, x_2) \supset P(x_1, x_1)\big)
         \end{equation}
@@ -107,9 +107,18 @@
         \end{equation}
         Затем запишем вспомогательное утверждение:
         \[
-            \vdash \forall x_i(\mathcal{A} \supset \mathcal{B}) \supset (\forall x_i\mathcal{A} \supset \forall x_i\mathcal{B})
+            \vdash \forall x_i(\mathcal{A} \supset \mathcal{B}) \supset (\forall x_i\mathcal{A} \supset \forall x_i\mathcal{B}).
         \]
-        при $\mathcal{A} \leftrightharpoons P(x_1, x_1, x_i)$ и $\mathcal{B} \leftrightharpoons P(x_1, x_2, x_i)$:
+        Поясним это утверждение. Докажем $\forall x_i(\mathcal{A} \supset \mathcal{B}), \forall x_i\mathcal{A} \vdash \forall x_i\mathcal{B}$:
+        \begin{enumerate}[label=\arabic*)]
+            \item $\forall x_i(\mathcal{A} \supset \mathcal{B})$ (гипотеза);
+            \item $\mathcal{A} \supset \mathcal{B}$ (из 1 по правилу индивидуализации, переменная $x_i$ свободна для самой себя в любой формуле);
+            \item $\forall x_i\mathcal{A}$ (гипотеза);
+            \item $\mathcal{A}$ (из 3 по правилу индивидуализации, переменная $x_i$ свободна для самой себя в любой формуле);
+            \item $\mathcal{B}$ (из 4, 2 по MP);
+            \item $\forall x_i\mathcal{B}$ (из 5 по Gen).
+        \end{enumerate}
+        В выводе выше единственная переменная $x_i$, к которой применялось правило Gen, является связанной в обеих гипотезах выводимости, поэтому можно применить теорему дедукции (даже дважды) и получить искомое $\vdash \forall x_i(\mathcal{A} \supset \mathcal{B}) \supset (\forall x_i\mathcal{A} \supset \forall x_i\mathcal{B})$. Запишем проверенное утверждение при $\mathcal{A} \leftrightharpoons P(x_1, x_1, x_i)$ и $\mathcal{B} \leftrightharpoons P(x_1, x_2, x_i)$:
         \begin{equation}\label{eq:step_8}
             \vdash \forall x_i\big(P(x_1, x_1, x_i) \supset P(x_1, x_2, x_i)\big) \supset \big(\forall x_iP(x_1, x_1, x_i) \supset \forall x_iP(x_1, x_2, x_i)\big).
         \end{equation}
@@ -118,4 +127,5 @@
             \vdash x_1 = x_2 \supset \big(\forall x_iP(x_1, x_1, x_i) \supset \forall x_iP(x_1, x_2, x_i)\big) \Longleftrightarrow\ \vdash x_1 = x_2 \supset \big(A(x_1, x_1) \supset A(x_1, x_2)\big).
         \]
     \end{enumerate}
+    Таким образом, индукцией по числу связок и кванторов в формуле $A$ проверено утверждение леммы, это завершает доказательство.
 \end{proof}

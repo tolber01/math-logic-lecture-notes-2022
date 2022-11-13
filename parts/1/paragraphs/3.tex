@@ -289,25 +289,28 @@
         \end{enumerate}
         Теперь дважды применяем теорему дедукции и получаем искомую выводимость.
 
-        \item Доказательство $A \supset B,\ \neg\neg A \vdash B$:
+        \item Доказательство $A \supset B \vdash \neg\neg A \supset B$:
         \begin{enumerate}[label=\arabic*.]
-            \item $\neg\neg A$ (гипотеза);
-            \item $A$ (согласно выведенному $\neg\neg A \vdash A$ в лемме \ref{th:negations});
             \item $A \supset B$ (гипотеза);
-            \item $B$ (из 2, 3 по MP).
+            \item $(A \supset B) \supset \big(\neg\neg A \supset (A \supset B)\big)$ (А1);
+            \item $\neg\neg A \supset (A \supset B)$ (из 1, 2 по MP);
+            \item $\big(\neg\neg A \supset (A \supset B)\big) \supset \big((\neg\neg A \supset A) \supset (\neg\neg A \supset B)\big)$ (А2);
+            \item $(\neg\neg A \supset A) \supset (\neg\neg A \supset B)$ (из 3, 4 по MP);
+            \item $\neg\neg A \supset A$ (теорема, доказано в лемме \ref{th:negations} п.1);
+            \item $\neg\neg A \supset B$ (из 6, 5 по MP).
         \end{enumerate}
-        Тогда по теореме дедукции справедливо $A \supset B \vdash \neg\neg A \supset B$. Далее докажем $A \supset B,\ \neg B \vdash \neg A$:
+        Далее проверим $A \supset B, \neg B \vdash \neg A$:
         \begin{enumerate}[label=\arabic*.]
-            \item $\neg B \supset (\neg\neg A \supset \neg B)$ (А1);
-            \item $\neg B$ (гипотеза);
-            \item $\neg\neg A \supset \neg B$ (из 2, 1 по MP);
             \item $(\neg\neg A \supset \neg B) \supset \big((\neg\neg A \supset B) \supset \neg A\big)$ (А3);
-            \item $(\neg\neg A \supset B) \supset \neg A$ (из 3, 4 по MP);
+            \item $\neg B$ (гипотеза);
+            \item $\neg B \supset (\neg\neg A \supset \neg B)$ (А1);
+            \item $\neg\neg A \supset \neg B$ (из 2, 3 по MP);
+            \item $(\neg\neg A \supset B) \supset \neg A$ (из 4, 1 по MP);
             \item $A \supset B$ (гипотеза);
-            \item $\neg\neg A \supset B$ (согласно доказанному $A \supset B \vdash \neg\neg A \supset B$);
+            \item $\neg\neg A \supset B$ (из 6 по $A \supset B \vdash \neg\neg A \supset B$);
             \item $\neg A$ (из 7, 5 по MP).
         \end{enumerate}
-        Тогда, дважды применяя теорему дедукции, получаем требуемую выводимость: $\vdash (A \supset B) \supset (\neg B \supset \neg A)$.
+        Из полученной выводимости, дважды применяя теорему дедукции, получаем требуемое.
 
         \item Ясно, что $A,\ A \supset B \vdash B$. Дважды используя теорему дедукции, получаем $\vdash A \supset \big((A \supset B) \supset B\big)$. Далее согласно \ref{item:contraposition} получаем $\vdash \big((A \supset B) \supset B\big) \supset \big(\neg B \supset \neg \big(A \supset B)\big)$. Наконец, задействуя лемму \ref{th:implication_transitivity} на предыдущих двух выводимостях, получаем искомое $\vdash A \supset \big(\neg B \supset \neg(A \supset B)\big)$.
 
