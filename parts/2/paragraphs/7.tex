@@ -129,3 +129,42 @@
     \end{enumerate}
     Таким образом, индукцией по числу связок и кванторов в формуле $A$ проверено утверждение леммы, это завершает доказательство.
 \end{proof}
+
+\textbf{Примеры}:
+\begin{enumerate}
+    \item Теория групп $G$: предикатная буква $A_1^2$ ($A_1^2(x_1, x_2) \leftrightharpoons x_1 = x_2$), функциональная буква $f_1^2$ ($f_1^2(x_1, x_2) \leftrightharpoons x_1 + x_2$), предметная константа $a_1$ ($0$). Собственные аксиомы:
+    \begin{enumerate}[label=\Alph*.]
+        \item $x_1 + (x_2 + x_3) = (x_1 + x_2) + x_3$;
+        \item $x_1 + 0 = x_1$;
+        \item $\forall x_1\exists x_2(x_1 + x_2 = 0)$;
+        \item $x_1 = x_1$;
+        \item $x_1 = x_2 \supset x_2 = x_1$;
+        \item $x_1 = x_2 \supset (x_2 = x_3 \supset x_1 = x_3)$;
+        \item $x_1 = x_2 \supset (x_1 + x_3 = x_2 + x_3 \land x_3 + x_1 = x_3 + x_2)$.
+    \end{enumerate}
+    Можно показать, что $G$ есть теория первого порядка с равенством. \\
+    Если добавить аксиому
+    \begin{enumerate}[label=\Alph*., start=8]
+        \item $x_1 + x_2 = x_2 + 1$,
+    \end{enumerate}
+    то получится теория $G_C$ коммутативных (абелевых) групп.
+
+    \item Теория полей $F$: предикатная буква $A_1^2$ ($A_1^2(x_1, x_2) \leftrightharpoons x_1 = x_2$), функциональные буквы $f_1^2$ ($f_1^2(x_1, x_2) \leftrightharpoons x_1 + x_2$) и $f_2^2$ ($f_2^2(x_1, x_2) \leftrightharpoons x_1\cdot x_2$), предметные константы $a_1$ ($0$) и $a_2$ ($1$). Собственные аксиомы:
+    \begin{enumerate}[label=\Alph*.]
+        \item $x_1 + (x_2 + x_3) = (x_1 + x_2) + x_3$;
+        \item $x_1 + 0 = x_1$;
+        \item $\forall x_1\exists x_2(x_1 + x_2 = 0)$;
+        \item $x_1 = x_1$;
+        \item $x_1 = x_2 \supset x_2 = x_1$;
+        \item $x_1 = x_2 \supset (x_2 = x_3 \supset x_1 = x_3)$;
+        \item $x_1 = x_2 \supset (x_1 + x_3 = x_2 + x_3 \land x_3 + x_1 = x_3 + x_2)$;
+        \item $x_1 + x_2 = x_2 + 1$;
+        \item $x_1 = x_2 \supset (x_1\cdot x_3 = x_2\cdot x_3 \land x_3 \cdot x_1 = x_3 \cdot x_2)$;
+        \item $x_1\cdot(x_2\cdot x_3) = (x_1\cdot x_2)\cdot x_3$;
+        \item $x_1\cdot(x_2 + x_3) = (x_1\cdot x_2) + (x_1\cdot x_3)$;
+        \item $x_1\cdot x_2 = x_2\cdot x_1$;
+        \item $x_1\cdot 1 = x_1$;
+        \item $x_1 \neq 0 \supset \exists x_2(x_1\cdot x_2 = 1)$.
+    \end{enumerate}
+    Можно показать, что $F$ есть теория первого порядка с равенством. Аксиомы (A)--(M) определяют теорию $R_C$ коммутативных колец с единицей.
+\end{enumerate}

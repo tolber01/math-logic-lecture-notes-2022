@@ -1,0 +1,91 @@
+\subsection{Предварённые нормальные формы}
+\begin{definition*}
+    Формула $Q_1x_1\dots Q_nx_nA$, где $Q_ix_i$~---~квантор всеобщности или существования, предметные переменные $x_i$ и $x_j$ различны при $i \neq j$ и формула $A$ не содержит кванторов, называется формулой в \textit{предварённой нормальной форме} или в \textit{пренексной нормальной форме} (\textit{ПНФ}) (случай $n = 0$ также включается в это определение).
+\end{definition*}
+Докажем, что для любой формулы можно построить эквивалентную ей формулу в ПНФ (формулы $A$ и $B$ называют \textit{эквивалентными}, если $\vdash A \equiv B$).
+\begin{lemma}\label{th:quantor_bracketing}
+    Во всякой теории первого порядка:
+    \begin{enumerate}[label=\arabic*)]
+        \item $\vdash (\forall xA(x) \supset B) \equiv \exists y(A(y) \supset B)$, если $y$ не входит свободно ни в $A(x)$, ни в $B$.
+        \item $\vdash (\exists xA(x) \supset B) \equiv \forall y(A(y) \supset B)$, если $y$ не входит свободно ни в $A(x)$, ни в $B$.
+        \item $\vdash (B \supset \forall xA(x)) \equiv \forall y(B \supset A(y))$, если $y$ не входит свободно ни в $A(x)$, ни в $B$.
+        \item $\vdash (B \supset \exists xA(x)) \equiv \exists y(B \supset A(y))$, если $y$ не входит свободно ни в $A(x)$, ни в $B$.
+        \item $\vdash \neg\forall xA \equiv \exists x\neg A$.
+        \item $\vdash \neg\exists xA \equiv \forall x\neg A$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}\leavevmode
+    \begin{enumerate}[label=\arabic*)]
+        \item
+        Доказательство $\forall xA(x) \supset B, \neg\exists y(A(y) \supset B) \vdash B \land \neg B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\forall xA(x) \supset B$ (гипотеза);
+            \item $\neg\neg\forall y\neg(A(y) \supset B)$ (гипотеза, квантор $\exists$ заменён по эквивалентности);
+            \item $\neg\neg\forall y\neg(A(y) \supset B) \supset \forall y\neg(A(y) \supset B)$ (частный случай тавтологии $\neg\neg\mathcal{A} \supset \mathcal{A}$);
+            \item $\forall y\neg(A(y) \supset B)$ (из 2, 3 по MP);
+            \item $\neg(A(y) \supset B)$ (из 4 по правилу индивидуализации, переменная $y$ свободна для самой себя в любой формуле);
+            \item $\neg(A(y) \supset B) \supset A(y) \land \neg B$ (частный случай тавтологии $\neg(\mathcal{A} \supset \mathcal{B}) \supset \mathcal{A} \land \neg\mathcal{B}$);
+            \item $A(y) \land \neg B$ (из 5, 6 по MP);
+            \item $A(y) \land \neg B \supset A(y)$ (частный случай тавтологии $\mathcal{A} \land \mathcal{B} \supset \mathcal{A}$);
+            \item $A(y)$ (из 7, 8 по MP);
+            \item $\forall yA(y)$ (из 9 по Gen);
+            \item $\forall xA(x)$ (из 10 по лемме \ref{th:var_rename}, так как $A(x)$ и $A(y)$, очевидно, подобны);
+            \item $B$ (из 1, 11 по MP);
+            \item $A(y) \land \neg B \supset \neg B$ (частный случай тавтологии $\mathcal{A} \land \mathcal{B} \supset \mathcal{B}$);
+            \item $\neg B$ (7, 13 по MP);
+            \item $B \land \neg B$ (из 12, 14 по правилу конъюнкции).
+        \end{enumerate}
+        Так как переменная $y$ не является свободной ни в одной из гипотез, и только к этой переменной применялось правило Gen, то можно применить теорему дедукции и получить
+        \[
+            \forall xA(x) \supset B \vdash \neg\exists y(A(y) \supset B) \supset B \land \neg B.
+        \]
+        С учётом этого с помощью тавтологии $(\neg\mathcal{A} \supset \mathcal{B} \land \neg\mathcal{B}) \supset \mathcal{A}$, правила MP и последующего применения теоремы дедукции заключаем
+        \begin{equation}\label{eq:pnf_1}
+            \vdash (\forall xA(x) \supset B) \supset \exists y(A(y) \supset B).
+        \end{equation}
+        Докажем $\exists y(A(y) \supset B), \forall xA(x) \vdash_C B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\exists y(A(y) \supset B)$ (гипотеза);
+            \item $A(a) \supset B$ (из 1 по правилу C);
+            \item $\forall xA(x)$ (гипотеза);
+            \item $A(a)$ (из 3 по правилу индивидуализации, константа свободна для любой переменной в любой формуле);
+            \item $B$ (из 2, 4 по MP).
+        \end{enumerate}
+        Таким образом, показано $\exists y(A(y) \supset B), \forall xA(x) \vdash_C B$, а из этого, согласно теореме \ref{th:c_rule_inference}, вытекает $\exists y(A(y) \supset B), \forall xA(x) \vdash B$. Так как в рассуждениях выше не применялось правило Gen, то можно использовать теорему дедукции (даже дважды):
+        \begin{equation}\label{eq:pnf_2}
+            \vdash \exists y(A(y) \supset B) \supset (\forall xA(x) \supset B).
+        \end{equation}
+        Из полученных \eqref{eq:pnf_1} и \eqref{eq:pnf_2} по правилу конъюнкции заключаем искомое
+        \[
+            \vdash \big((\forall xA(x) \supset B) \supset \exists y(A(y) \supset B)\big) \land \big(\exists y(A(y) \supset B) \supset (\forall xA(x) \supset B)\big) \Longleftrightarrow\ \vdash (\forall xA(x) \supset B) \equiv \exists y(A(y) \supset B).
+        \]
+    \end{enumerate}
+\end{proof}
+\begin{lemma}
+    Существует эффективная процедура, преобразующая всякую формулу к эквивалентной ей формуле в предварённой нормальной форме.
+\end{lemma}
+\begin{proof}
+    Считаем, что все связанные переменные в формуле различные. Докажем лемму индукцией по числу связок и кванторов $n \geqslant 0$ в формуле $A$.
+
+    \textbf{База}: $n = 0$. В формуле $A$ нет ни связок, ни кванторов~---~доказывать нечего, формула уже в ПНФ.
+
+    \textbf{Индукционное предположение}: пусть утверждение верно для всех формул всех значений $k = 0, 1, \dots, n - 1$ числа связок и кванторов, то есть для всех таких формул $A$ существует эффективный алгоритм построения предварённой нормальной формы этих формул.
+
+    \textbf{Индукционный шаг}: докажем утверждение для произвольной формулы $A$ с $k = n$ связками и кванторами. Имеется три случая.
+    \begin{enumerate}
+        \item \underline{$A$ есть $\neg P$}. В формуле $P$ число связок и кванторов меньше, чем в $A$ как минимум на $1$. Тогда для $P$ верно индукционное предположение: для $P$ можно эффективно построить её ПНФ $N$: $\vdash P \equiv N$. Из упомянтой выводимости следует $\vdash \neg N \equiv \neg P$ (это выводится с помощью тавтологии $(\mathcal{A} \equiv \mathcal{B}) \supset (\neg\mathcal{B} \equiv \neg\mathcal{A})$), что равносильно $\vdash \neg N \equiv A$. Применяя эквиваленации 5, 6 из леммы \ref{th:quantor_bracketing}, заносим связку $\neg$ в формуле $\neg N$ за кванторы до тех пор, пока эта формула не примет вид $Q_1x_1Q_2x_2\dots Q_mx_m\neg R$, где $R$~---~бескванторная формула, что есть ПНФ. Это доказывает утверждение для первого случая.
+        
+        \item \underline{$A$ есть $P \supset Q$}. По аналогичным п.1 причинам для $P$ и $Q$ верно индукционное предположение: существует эффективный алгоритм построения формул $N_1$ и $N_2$ в ПНФ таких, что $\vdash P \equiv N_1$ и $\vdash Q \equiv N_2$. Запишем частный случай тавтологии:
+        \[
+            \vdash (P \equiv N_1) \land (Q \equiv N_2) \supset \big((P \supset Q) \equiv (N_1 \supset N_2)\big).
+        \]
+        Правило конъюнкции из упомянутых индукционных предположений даёт выводимость $\vdash (P \equiv N_1) \land (Q \equiv N_2)$, что из записанного частного случая тавтологии по MP приводит к $\vdash (P \supset Q) \equiv (N_1 \supset N_2)$. Применяем лемму \ref{th:quantor_bracketing} (пп.1--4) к формуле $N_1 \supset N_2$, приводим её к виду $N_3 \leftrightharpoons Q_1x_1Q_2x_2\dots Q_mx_mR$, где $R$~---~бескванторная формула. Это рассуждение, а также правило сечения, приводит нас к выводимости 
+        \[
+            \vdash (P \supset Q) \equiv N_3 \Longleftrightarrow\ \vdash A \equiv N_3,
+        \]
+        что и требовалось для данного случая.
+
+        \item \underline{$A$ есть $\forall x_iP$}. Для $P$ снова верно индукционное предположение: существует эффективный алгоритм построения формулы $N$ в ПНФ такой, что $\vdash P \equiv N$. Из этой выводимости, как нетрудно понять, следует $\vdash \forall x_iP \equiv \forall x_iN$, то есть $\vdash A \equiv \forall x_iN$. Ясно, что если $N$~---~формула в ПНФ, то и $\forall x_iN$~---~формулой в ПНФ, что завершает доказательство последнего случая.
+    \end{enumerate}
+    Все случаи разобраны, индукционный шаг доказан. Тем самым, по индукции доказана искомая лемма.
+\end{proof}
