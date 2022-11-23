@@ -59,6 +59,72 @@
         \[
             \vdash \big((\forall xA(x) \supset B) \supset \exists y(A(y) \supset B)\big) \land \big(\exists y(A(y) \supset B) \supset (\forall xA(x) \supset B)\big) \Longleftrightarrow\ \vdash (\forall xA(x) \supset B) \equiv \exists y(A(y) \supset B).
         \]
+
+        \item Докажем $\exists xA(x) \supset B, A(y) \vdash B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\exists xA(x) \supset B$ (гипотеза);
+            \item $A(y)$ (гипотеза);
+            \item $\exists xA(x)$ (из 2 по правилу существования, ясно, что $x$ свободно для $y$ в $A(x)$ по условию);
+            \item $B$ (из 1, 3 по MP).
+        \end{enumerate}
+        В выводе выше не использовалось правило Gen, поэтому допустимо применить теорему дедукции: $\exists xA(x) \supset B \vdash A(y) \supset B$. Применяя правило Gen к формуле $A(y) \supset B$, а также правило сечения, получаем $\exists xA(x) \supset B \vdash \forall y(A(y) \supset B)$. Так как применённое правило Gen связало переменную $y$, не входящую свободно в $\exists xA(x) \supset B$ по условию, можно снова применить теорему дедукции и получить $\vdash (\exists xA(x) \supset B) \supset \forall y(A(y) \supset B)$. \\
+        Поясним теперь $\forall y(A(y) \supset B), \exists xA(x) \vdash_C B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\forall y(A(y) \supset B)$ (гипотеза);
+            \item $A(a) \supset B$ (из 1 по правилу индивидуализации, константа $a$ свободна для любой переменной в любой формуле);
+            \item $\exists xA(x)$ (гипотеза);
+            \item $A(a)$ (из 3 по правилу C);
+            \item $B$ (из 4, 2 по MP).
+        \end{enumerate}
+        Тогда, применяя теорему \ref{th:c_rule_inference}, заключаем, что $\forall y(A(y) \supset B), \exists xA(x) \vdash B$. Так как правило Gen в нашем выводе не применялось, воспользуемся теоремой дедукции (даже дважды): $\vdash \forall y(A(y) \supset B) \supset (\exists xA(x) \supset B)$. \\
+        Применяя правило конъюнкции к двум полученным выводимостям, заключаем требуемое:
+        \[
+            \vdash \big((\exists xA(x) \supset B) \supset \forall y(A(y) \supset B)\big) \land \big(\forall y(A(y) \supset B) \supset (\exists xA(x) \supset B)\big) \Longleftrightarrow\ \vdash (\exists xA(x) \supset B) \equiv \forall y(A(y) \supset B)\big).
+        \]
+
+        \item Докажем $B \supset \forall xA(x), B \vdash A(y)$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $B$ (гипотеза);
+            \item $B \supset \forall xA(x)$ (гипотеза);
+            \item $\forall xA(x)$ (из 1, 2 по MP);
+            \item $A(y)$ (из 3 по правилу индивидуализации, $y$ свободно для $x$ в $A(x)$ по условию).
+        \end{enumerate}
+        В силу того, что правило Gen в выводе выше не применялось, используем теорему дедукции: $B \supset \forall xA(x) \vdash B \supset A(y)$. Применяя правило Gen к формуле $B \supset A(y)$ и правило сечения, получаем выводимость $B \supset \forall xA(x) \vdash \forall y(B \supset A(y))$. Так как применённое правило Gen связало переменную $y$, не входящую свободно в $B \supset \forall xA(x)$, то можно снова применить теорему дедукции: $\vdash (B \supset \forall xA(x)) \supset \forall y(B \supset A(y))$. \\
+        Поясним $\forall y(B \supset A(y)), B \vdash \forall xA(x)$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\forall y(B \supset A(y))$ (гипотеза);
+            \item $B \supset A(x)$ (из 1 по правилу индивидуализации, $x$ свободно для $y$ в $A(x)$ по условию);
+            \item $B$ (гипотеза);
+            \item $A(x)$ (из 3, 2 по MP);
+            \item $\forall xA(x)$ (из 4 по Gen).
+        \end{enumerate}
+        Так как правило Gen в выводе выше связало переменную $x$, не входящую свободно в $\forall y(B \supset A(y))$ и $B$, то можно применить теорему дедукции (дважды): $\vdash \forall y(B \supset A(y)) \supset (B \supset \forall xA(x))$. \\
+        Применяя правило конъюнкции к полученным двум выводимостям, получаем требуемую теорему:
+        \[
+            \vdash \big((B \supset \forall xA(x)) \supset \forall y(B \supset A(y))\big) \land \big(\forall y(B \supset A(y)) \supset (B \supset \forall xA(x))\big) \Longleftrightarrow\ \vdash (B \supset \forall xA(x)) \equiv \forall y(B \supset A(y)).
+        \]
+
+        \item Докажем $B \supset \exists xA(x), B \vdash_C A(a)$, где $a$~---~константа, не входящая в $A(x)$ и $B$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $B \supset \exists xA(x)$ (гипотеза);
+            \item $B$ (гипотеза);
+            \item $\exists xA(x)$ (из 2, 1 по MP);
+            \item $A(a)$ (правило C).
+        \end{enumerate}
+        По теореме \ref{th:c_rule_inference} получаем $B \supset \exists xA(x), B \vdash A(a)$. Так как правило Gen не применялось к переменным, свободным в $B \supset \exists xA(x)$ и $B$, можно применить теорему дедукции: $B \supset \exists xA(x) \vdash B \supset A(a)$. Применяя правило существования и правило сечения (константа $a$ свободна для любой переменной в любой формуле), получаем $B \supset \exists xA(x) \vdash \exists y(B \supset A(y))$. Понятно, что и в данном случае правило Gen не применялось к переменным, свободным в $B \supset \exists xA(x)$, поэтому можно снова применить теорему дедукции: $\vdash (B \supset \exists xA(x)) \supset \exists y(B \supset A(y))$. \\
+        Докажем теперь $\exists y(B \supset A(y)), B \vdash_C \exists xA(x)$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\exists y(B \supset A(y))$ (гипотеза);
+            \item $B \supset A(a)$ (из 1 по правилу C);
+            \item $B$ (гипотеза);
+            \item $A(a)$ (из 3, 2 по MP);
+            \item $\exists xA(x)$ (из 4 по правилу существования, константа $a$ свободна для любой переменной в любой формуле).
+        \end{enumerate}
+        По теореме \ref{th:c_rule_inference} получаем $\exists y(B \supset A(y)), B \vdash \exists xA(x)$. Правомерность применения теоремы дедукции аналогично предыдущим пунктам, применяем (дважды): $\vdash \exists y(B \supset A(y)) \supset (B \supset \exists xA(x))$. \\
+        Применяя правило конъюнкции к полученным двум выводимостям, получаем требуемую теорему:
+        \[
+            \vdash \big((B \supset \exists xA(x)) \supset \exists y(B \supset A(y))\big) \land \big(\exists y(B \supset A(y)) \supset (B \supset \exists xA(x))\big) \Longleftrightarrow\ \vdash (B \supset \exists xA(x)) \equiv \exists y(B \supset A(y)).
+        \]
     \end{enumerate}
 \end{proof}
 \begin{lemma}
