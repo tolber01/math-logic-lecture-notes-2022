@@ -125,6 +125,42 @@
         \[
             \vdash \big((B \supset \exists xA(x)) \supset \exists y(B \supset A(y))\big) \land \big(\exists y(B \supset A(y)) \supset (B \supset \exists xA(x))\big) \Longleftrightarrow\ \vdash (B \supset \exists xA(x)) \equiv \exists y(B \supset A(y)).
         \]
+
+        \item Докажем $\forall x\neg\neg A \vdash \forall xA$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\forall x\neg\neg A$ (гипотеза);
+            \item $\neg\neg A$ (из 1 по правилу индивидуализации, переменная $x$ свободна для себя в любой формуле);
+            \item $\neg\neg A \supset A$ (частный случай тавтологии $\neg\neg\mathcal{A} \supset \mathcal{A}$);
+            \item $A$ (из 2, 3 по MP);
+            \item $\forall xA$ (из 4 по Gen).
+        \end{enumerate}
+        Так как правило Gen в выводе выше применялось к переменной $x$, которая связана в гипотезе $\forall x\neg\neg A$, можно воспользоваться теоремой дедукции и получить $\vdash \forall x\neg\neg A \supset \forall xA$. Далее имеем:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\forall x\neg\neg A \supset \forall xA$ (доказанная выше теорема);
+            \item $(\forall x\neg\neg A \supset \forall xA) \supset (\neg \forall xA \supset \neg \forall x\neg\neg A)$ (частный случай тавтологии $(\mathcal{A} \supset \mathcal{B}) \supset (\neg\mathcal{B} \supset \neg\mathcal{A})$);
+            \item $\neg \forall xA \supset \neg \forall x\neg\neg A$ (из 1, 2 по MP).
+        \end{enumerate}
+        Последняя формула в выводе выше по эквивалентной замене приводит нас к $\vdash \neg \forall xA \supset \exists x\neg A$. \\
+        Поясним теперь $\forall xA \vdash \forall x\neg\neg A$:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\forall xA$ (гипотеза);
+            \item $A$ (из 1 по правилу индивидуализации, переменная $x$ свободна для себя в любой формуле);
+            \item $A \supset \neg\neg A$ (частный случай тавтологии $\mathcal{A} \supset \neg\neg\mathcal{A}$);
+            \item $\neg\neg A$ (из 2, 3 по MP);
+            \item $\forall x\neg\neg A$ (из 4 по Gen).
+        \end{enumerate}
+        Так как правило Gen в выводе выше применялось к переменной $x$, которая связана в гипотезе $\forall xA$, можно воспользоваться теоремой дедукции и получить $\vdash \forall xA \supset \forall x\neg\neg A$. Далее имеем:
+        \begin{enumerate}[label=\arabic*.]
+            \item $\forall xA \supset \forall x\neg\neg A$ (доказанная выше теорема);
+            \item $(\forall xA \supset \forall x\neg\neg A) \supset (\neg\forall x\neg\neg A \supset \neg\forall xA)$ (частный случай тавтологии $(\mathcal{A} \supset \mathcal{B}) \supset (\neg\mathcal{B} \supset \neg\mathcal{A})$);
+            \item $\neg\forall x\neg\neg A \supset \neg\forall xA$ (из 1, 2 по MP).
+        \end{enumerate}
+        Последняя формула в выводе выше по эквивалентной замене приводит нас к $\vdash \exists x\neg A \supset \neg\forall xA$. Имея в виду полученные две выводимости, по правилу конъюнкции получаем требуемое:
+        \[
+            \vdash (\neg \forall xA \supset \exists x\neg A) \land (\exists x\neg A \supset \neg\forall xA) \Longleftrightarrow\ \vdash \neg \forall xA \equiv \exists x\neg A.
+        \]
+
+        \item Если заменить квантор $\exists$ на $\forall$ по эквивалентной замене, то получится формула $\neg\neg\forall x\neg A \equiv \forall x\neg A$, которая является частным случаем тавтологии $\neg\neg\mathcal{A} \equiv \mathcal{A}$.
     \end{enumerate}
 \end{proof}
 \begin{lemma}
