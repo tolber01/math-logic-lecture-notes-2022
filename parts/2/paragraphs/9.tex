@@ -1,2 +1,67 @@
 \subsection{Другие аксиоматические теории первого порядка}
-\dots
+\textbf{Исчисление предикатов Бернайса} \\
+К символам рассмотренного в лекциях ИП добавляется квантор существования. Соответственно меняется и определение формулы. К аксиомам (А1)--(А3) добавляются аксиомы:
+\begin{enumerate}[label=(Б\arabic*)]
+    \item $\forall xA(x) \supset A(y)$;
+    \item $A(y) \supset \exists xA(x)$,
+\end{enumerate}
+где $A(x)$~---~любая формула, содержащая свободные вхождения переменной $x$, причём ни одно из них не находится в области действия никакого квантора по $y$, если таковые имеются. Формула $A(y)$ получается из формулы $A(x)$ заменой всех свободных вхождений переменной $x$ на переменную $y$. Эти аксиомы называются аксиомами Бернайса. \\
+К правилу вывода MP добавляются правила:
+\begin{enumerate}
+    \item $\dfrac{A \supset B(x)}{A \supset \forall xB(x)}$ ($\forall$-правило, или обобщение);
+    \item $\dfrac{B(x) \supset A}{\exists xB(x) \supset A}$ ($\exists$-правило, или конкретизация),
+\end{enumerate}
+где $B(x)$ может содержать, а $A$ не содержит свободные вхождения $x$. \\
+Для такого ИП справедлива теорема дедукции в формулировке для ИВ: если $\Gamma, A \vdash B$, то $\Gamma \vdash A \supset B$.
+
+\textbf{Секвенциональное исчисление предикатов} \\
+К алфавиту исчисления секвенций добавляются кванторы $\forall$, $\exists$. Понятия секвенции, вывода те же, что в исчислении секвенций. Терм, формула, свободные и связанные переменные, свободный терм определяются так же, как в \S1. \\
+Схема аксиом: $A \vdash A$. \\
+Правила вывода ($\Gamma$, $\Gamma_1$, $\Gamma_2$, $\Gamma_3$~---~произвольные множества формул, может быть, пустые, $A$, $B$, $C$~---~произвольные формулы; $t$~---~терм, свободный для $x$ в $A(x)$; $A(t)$ получается из формулы $A(x)$ заменой всех свободных вхождений переменной $x$ на $t$):
+\begin{enumerate}[label=\arabic*)]
+    \item $\dfrac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash B}{\Gamma_1, \Gamma_2 \vdash A \land B}$ (\textit{введение $\land$});
+    \item $\dfrac{\Gamma \vdash A \land B}{\Gamma \vdash A}$ (\textit{удаление $\land$});
+    \item $\dfrac{\Gamma \vdash A \land B}{\Gamma \vdash B}$ (\textit{удаление $\land$});
+    \item $\dfrac{\Gamma \vdash A}{\Gamma \vdash A \lor B}$ (\textit{введение $\lor$});
+    \item $\dfrac{\Gamma \vdash B}{\Gamma \vdash A \lor B}$ (\textit{введение $\lor$});
+    \item $\dfrac{\Gamma_1 \vdash A \lor B;\ \Gamma_2, A \vdash C;\ \Gamma_3, B \vdash C}{\Gamma_1, \Gamma_2, \Gamma_3 \vdash C}$ (\textit{удаление $\lor$});
+    \item $\dfrac{\Gamma, A \vdash B}{\Gamma \vdash A \supset B}$ (\textit{введение $\supset$});
+    \item $\dfrac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash A \supset B}{\Gamma_1, \Gamma_2 \vdash B}$ (\textit{удаление $\supset$});
+    \item $\dfrac{\Gamma, A \vdash}{\Gamma \vdash \neg A}$ (\textit{введение $\neg$});
+    \item $\dfrac{\Gamma_1 \vdash A;\ \Gamma_2 \vdash \neg A}{\Gamma_1, \Gamma_2 \vdash}$ (\textit{сведение к противоречию});
+    \item $\dfrac{\Gamma, \neg A \vdash}{\Gamma \vdash A}$ (\textit{удаление $\neg$});
+    \item $\dfrac{\Gamma \vdash}{\Gamma \vdash A}$ (\textit{утончение});
+    \item $\dfrac{\Gamma \vdash A}{\Gamma, B \vdash A}$ (\textit{расширение});
+    \item $\dfrac{\Gamma_1, A, B, \Gamma_2 \vdash C}{\Gamma_1, B, A, \Gamma_2 \vdash C}$ (\textit{перестановка});
+    \item $\dfrac{\Gamma, A, A \vdash C}{\Gamma, A \vdash C}$ (\textit{сокращение});
+    \item $\dfrac{\Gamma \vdash A(x)}{\Gamma \vdash \forall xA(x)}$, где $x$ не входит свободно ни в одну из формул в $\Gamma$ (\textit{введение $\forall$});
+    \item $\dfrac{\Gamma \vdash \forall xA(x)}{\Gamma \vdash A(t)}$ (\textit{удаление $\forall$});
+    \item $\dfrac{\Gamma \vdash A(t)}{\Gamma \vdash \exists xA(x)}$ (\textit{введение $\exists$});
+    \item $\dfrac{\Gamma, A(x) \vdash B}{\Gamma, \exists xA(x) \vdash B}$, где $x$ не входит свободно ни в одну из формул из $\Gamma$, а также в $B$ (\textit{удаление $\exists$}).
+\end{enumerate}
+
+\textbf{Исчисление предикатов Клини} \\
+Примитивные связки: $\neg$, $\land$, $\lor$, $\supset$. \\
+Схемы аксиом: 
+\begin{enumerate}[label=(А\arabic*)]
+    \item $A \supset (B \supset A)$;
+    \item $(A \supset B) \supset \Big(\big(A \supset (B \supset C)\big) \supset (A \supset C)\Big)$;
+    \item $A \land B \supset A$;
+    \item $A \land B \supset B$;
+    \item $(A \supset B) \supset \big((A \supset C) \supset (A \supset B \land C)\big)$;
+    \item $A \supset (A \lor B)$;
+    \item $B \supset (A \lor B)$;
+    \item $(A \supset C) \supset \Big((B \supset C) \supset \big((A \lor B) \supset C\big)\Big)$;
+    \item $(A \supset \neg B) \supset (B \supset \neg A)$;
+    \item $\neg\neg A \supset A$;
+    \item $\forall xA(x) \supset A(t)$;
+    \item $A(t) \supset \exists xA(x)$.
+\end{enumerate}
+В аксиомах (А11)--(А12) $t$~---~терм, свободный для $x$ в $A(x)$, $A(t)$ получается из формулы $A(x)$ заменой всех свободных вхождений переменной $x$ на $t$. \\
+Правила вывода: 
+\begin{enumerate}[label=\Roman*.]
+    \item MP;
+    \item $\dfrac{C \supset A(x)}{C \supset \forall yA(y)}$;
+    \item $\dfrac{A(x) \supset C}{\exists yA(y) \supset C}$,
+\end{enumerate}
+причём $x$ не входит свободно в $C$, а $y$ не входит свободно в $A(x)$ и свободна для $x$ в $A(x)$. 

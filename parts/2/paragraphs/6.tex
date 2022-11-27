@@ -355,10 +355,7 @@ $\Gamma \vdash_C A$ тогда и только тогда, когда сущес
     \[
         \Gamma, C_1(a_1), C_2(a_2), \dots, C_{k - 1}(a_{k - 1}) \vdash A.
     \]
-    По аналогии избавляемся от $C_{k - 1}(a_{k - 1}), C_{k - 2}(a_{k - 2}), \dots, C_1(a_1)$ и получаем требуемую выводимость:
-    \[
-        \Gamma \vdash A.
-    \]
+    По аналогии избавляемся от $C_{k - 1}(a_{k - 1}), C_{k - 2}(a_{k - 2}), \dots, C_1(a_1)$ и получаем требуемую выводимость: $\Gamma \vdash A$.
 \end{proof}
 \textbf{Пример}: $\vdash \forall x\big(A(x) \supset B(x)\big) \supset \big(\exists xA(x) \supset \exists xB(x)\big)$. \\
 Вывод $\forall x\big(A(x) \supset B(x)\big), \exists xA(x) \vdash_C \exists xB(x)$:
