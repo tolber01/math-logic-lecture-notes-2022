@@ -44,12 +44,12 @@
 \begin{table}[H]
     \centering
     \begin{tabular}{| c | c | c | c | c | c |}
-        \hline  & \HC $q_0$ & \HC \dots & \HC $q_i$ & \HC \dots & \HC $q_{r - 1}$ \\
-        \hline \HC $a_0$ & --- & \dots & --- & \dots & --- \\
-        \hline \HC $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ & $\ddots$ & $\vdots$ \\
-        \hline \HC$a_j$ & --- & \dots & $q_{ij}\ a_{ij}\ d_{ij}$ & \dots & --- \\
-        \hline \HC $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ & $\ddots$ & $\vdots$ \\
-        \hline \HC $a_{n - 1}$ & --- & \dots & --- & \dots & ---\\
+        \hline                 & \HC $q_0$ & \HC \dots & \HC $q_i$                & \HC \dots & \HC $q_{r - 1}$ \\
+        \hline \HC $a_0$       & ---       & \dots     & ---                      & \dots     & --- \\
+        \hline \HC $\vdots$    & $\vdots$  & $\ddots$  & $\vdots$                 & $\ddots$  & $\vdots$ \\
+        \hline \HC$a_j$        & ---       & \dots     & $q_{ij}\ a_{ij}\ d_{ij}$ & \dots     & --- \\
+        \hline \HC $\vdots$    & $\vdots$  & $\ddots$  & $\vdots$                 & $\ddots$  & $\vdots$ \\
+        \hline \HC $a_{n - 1}$ & ---       & \dots     & ---                      & \dots     & --- \\
         \hline
     \end{tabular}
 \end{table}
@@ -107,3 +107,112 @@
     \item \textit{Разветвление машин Тьюринга}. \\
     Пусть машины $T_1$, $T_2$, $T_3$ заданы программами $\Pi_1$, $\Pi_2$, $\Pi_3$ соответственно. Пусть при этом внутренние алфавиты этих машин попарно не пересекаются, $q_0'$, $q_0''$~---~некоторые различные заключительные состояния машины $T_1$. Заменим всюду в программе $\Pi_1$ состояние $q_0'$ некоторым начальным состоянием $q_1'$ машины $T_2$, $q_0''$~---~некоторым начальным состоянием $q_1''$ машины $T_3$. Новую программу объединим с $\Pi_2$ и $\Pi_3$. Получим программу $\Pi$ машины $T = T\big(T_1, \langle q_0', q_1'\rangle, T_2, \langle q_0'', q_1''\rangle, T_3\big)$~---~\textit{разветвления машин $T_2$ и $T_3$, управляемым машиной $T_1$}.
 \end{enumerate}
+
+\textbf{Примеры}.
+\begin{enumerate}
+    \item \underline{Пример на композицию машин Тьюринга}. \\
+    Построить композицию $T_1T_2$ машин Тьюринга $T_1$ и $T_2$ по паре состояний $\langle q_{10}, q_{21}\rangle$ и найти результат применения машины $T_1T_2$ к слову $P = 1^2[01]^21^2$ ($q_{20}$~---~заключительное состояние машины $T_2$).
+    \begin{table}[H]
+        \centering
+        $T_1$: \begin{tabular}{| c | c | c | c |}
+            \hline         & \HC $q_{11}$ & \HC $q_{12}$ & \HC $q_{13}$ \\
+            \hline \HC $0$ & $q_{10}0$L   & $q_{13}0$R   & $q_{11}0$R \\
+            \hline \HC $1$ & $q_{12}1$R   & $q_{13}1$R   & $q_{11}0$R \\
+            \hline
+        \end{tabular},\quad
+        $T_2$: \begin{tabular}{| c | c | c |}
+            \hline         & \HC $q_{21}$ & \HC $q_{22}$ \\
+            \hline \HC $0$ & $q_{22}1$L   & $q_{20}0$R \\
+            \hline \HC $1$ & $q_{22}1$L   & $q_{21}0$L \\
+            \hline
+        \end{tabular}.
+    \end{table}
+    \underline{Решение}. \\
+    Композиция машин $T_1$ и $T_2$ строится так: во всех командах машины $T_1$ состояние $q_{10}$ заменяется на $q_{21}$ машины $T_2$, и обе таблицы (изменённая для $T_1$ и оригинальная для $T_2$) объединяются:
+    \begin{table}[H]
+        \centering
+        $T_1T_2$: \begin{tabular}{| c | c | c | c | c | c |}
+            \hline         & \HC $q_{11}$ & \HC $q_{12}$ & \HC $q_{13}$ & \HC $q_{21}$ & \HC $q_{22}$ \\
+            \hline \HC $0$ & $q_{21}0$L   & $q_{13}0$R   & $q_{11}0$R   & $q_{22}1$L   & $q_{20}0$R \\
+            \hline \HC $1$ & $q_{12}1$R   & $q_{13}1$R   & $q_{11}0$R   & $q_{22}1$L   & $q_{21}0$L \\
+            \hline
+        \end{tabular}.
+    \end{table}
+    Для понятности дальнейших операций перепишем слово $P$ в полном виде: $P = 11010111$. Начальная конфигурация: $q_{11}11010111$. Проводим Тьюрингово вычисление на основе машины $T_1T_2$ и начальной конфигурации $q_{11}11010111$:
+    \begin{multline*}
+        q_{11}11010111 \models 1q_{12}1010111 \models 11q_{13}010111 \models 110q_{11}10111 \models 1101q_{12}0111 \models 11010q_{13}111 \models 110100q_{11}11 \models \\
+        \models 1101001q_{12}1 \models 11010011q_{13}0 \models 110100110q_{11}0 \models 11010011q_{21}00 \models 1101001q_{22}110 \models 110100q_{21}1010 \models \\
+        \models 11010q_{22}01010 \models 110100q_{20}1010.
+    \end{multline*}
+    Итоговое слово на ленте (крайние нули в слово не включаем): $T_1T_2(P) = 1[10]^2[01]^2$.
+
+    \item \underline{Пример на итерацию машины Тьюринга}. \\
+    Найти результат применения машины $T_1$ по паре состояний $\langle q_0, q_i\rangle$, $i = 1$, к слову $P = 1^{3k}$ (заключительными состояниями являются $q_0$ и $q_0'$):
+    \begin{table}[H]
+        \centering
+        $T_1$: \begin{tabular}{| c | c | c | c | c | c |}
+            \hline         & \HC $q_1$ & \HC $q_2$ & \HC $q_3$ & \HC $q_4$ & \HC $q_5$ \\
+            \hline \HC $0$ & $q_00$S   & $q_40$S   & $q_50$S   & $q_41$R   & $q_0'1$L \\
+            \hline \HC $1$ & $q_20$R   & $q_30$R   & $q_10$R   & ---       & --- \\
+            \hline
+        \end{tabular}
+    \end{table}
+    \underline{Решение}. \\
+    Итерация $T$ машины $T_1$ по паре состояний $\langle q_0, q_1\rangle$ строится путём замены $q_0$ на $q_1$ во всех командах $T_1$:
+    \begin{table}[H]
+        \centering
+        $T$: \begin{tabular}{| c | c | c | c | c | c |}
+            \hline         & \HC $q_1$ & \HC $q_2$ & \HC $q_3$ & \HC $q_4$ & \HC $q_5$ \\
+            \hline \HC $0$ & $q_10$S   & $q_40$S   & $q_50$S   & $q_41$R   & $q_0'1$L \\
+            \hline \HC $1$ & $q_20$R   & $q_30$R   & $q_10$R   & ---       & --- \\
+            \hline
+        \end{tabular}
+    \end{table}
+    Начальная конфигурация машины $T$: $q_11^{3k}$. Выполняем тьюрингово вычисление:
+    \[
+        q_11^{3k} \models 0q_21^{3k - 1} \models 0^2q_31^{3k - 2} \models 0^{3\cdot 1}q_11^{3(k - 1)} \models \dots \models 0^{3\cdot 2}q_11^{3(k - 2)} \models \dots \models \underbrace{0^{3k}q_10 \models 0^{3k}q_10}_{\text{зацикливание}}.
+    \]
+    Как видно, построенная итерация не применима к слову $1^{3k}$.
+
+    \item \underline{Пример на разветвление машин Тьюринга}. \\
+    Найти результат применения разветвления $T = T\big(T_1, \langle q_{10}', q_{21}\rangle, T_2, \langle q_{10}'', q_{31}\rangle, T_3\big)$ машин $T_2$ и $T_3$, управляемого машиной $T_1$, к слову $P = 101^3$ ($q_{20}$~---~заключительное состояние машины $T_2$, а $q_{30}$~---~заключительное состояние машины $T_3$):
+    \begin{table}[H]
+        \centering
+        $T_1$: \begin{tabular}{| c | c | c |}
+            \hline         & \HC $q_{11}$ & \HC $q_{12}$ \\
+            \hline \HC $0$ & $q_{12}0$R   & $q_{10}'0$R   \\
+            \hline \HC $1$ & $q_{12}1$R   & $q_{10}''1$L   \\
+            \hline
+        \end{tabular},\quad
+        $T_2$: \begin{tabular}{| c | c |}
+            \hline         & \HC $q_{21}$ \\
+            \hline \HC $0$ & $q_{20}1$S   \\
+            \hline \HC $1$ & $q_{21}0$R   \\
+            \hline
+        \end{tabular},\quad
+        $T_3$: \begin{tabular}{| c | c | c |}
+            \hline         & \HC $q_{31}$ & \HC $q_{32}$ \\
+            \hline \HC $0$ & $q_{32}1$L   & $q_{30}1$S \\
+            \hline \HC $1$ & $q_{31}1$R   & $q_{32}0$L \\
+            \hline
+        \end{tabular}.
+    \end{table}
+    \underline{Решение}. \\
+    Построение разветвления машин $T_2$ и $T_3$, управляемого машиной $T_1$, состоит в замене $q_{10}'$ на $q_{21}$ и $q_{10}''$ на $q_{31}$ во всех командах $T_1$, и объединении всех таблиц (изменённая таблица для $T_1$ и оригинальные таблицы $T_2$ и $T_3$):
+    \begin{table}[H]
+        \centering
+        $T$: \begin{tabular}{| c | c | c | c | c | c |}
+            \hline         & \HC $q_{11}$ & \HC $q_{12}$ & \HC $q_{21}$ & \HC $q_{31}$ & \HC $q_{32}$ \\
+            \hline \HC $0$ & $q_{12}0$R   & $q_{21}0$R   & $q_{20}1$S   & $q_{32}1$L   & $q_{30}1$S   \\
+            \hline \HC $1$ & $q_{12}1$R   & $q_{31}1$L   & $q_{21}0$R   & $q_{31}1$R   & $q_{32}0$L  \\
+            \hline
+        \end{tabular}.
+    \end{table}
+    Начальная конфигурация: $q_{11}10111$. Выполняем тьюрингово вычисление:
+    \[
+        q_{11}10111 \models 1q_{12}0111 \models 10q_{21}111 \models 100q_{21}11 \models \dots \models 10000q_{21}0 \models 10000q_{20}1.
+    \]
+    Таким образом, $T(P) = 10^41$.
+\end{enumerate}
+
+% \subsubsection{Вычислимость по Тьюрингу. Тезис Тьюринга}

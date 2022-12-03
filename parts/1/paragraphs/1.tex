@@ -27,8 +27,8 @@
         \centering
         \begin{tabular}{| c | c | l}
             \cline{1-2} \HC $A$ & \HC $\neg A$ &  \\
-            \cline{1-2} И & Л & И~---~истина, Л~---~ложь \\
-            \cline{1-2} Л & И & \\
+            \cline{1-2}       И &            Л & И~---~истина, Л~---~ложь \\
+            \cline{1-2}       Л &            И & \\
             \cline{1-2}
         \end{tabular}
     \end{table}
@@ -42,10 +42,10 @@
         \centering
         \begin{tabular}{| c | c | c |}
             \hline \HR $A$ & $B$ & $A \land B$ \\
-            \hline И & И & И \\
-            \hline Л & И & Л \\
-            \hline И & Л & Л \\
-            \hline Л & Л & Л \\
+            \hline       И &   И & И \\
+            \hline       Л &   И & Л \\
+            \hline       И &   Л & Л \\
+            \hline       Л &   Л & Л \\
             \hline
         \end{tabular}
     \end{table}
@@ -59,10 +59,10 @@
         \centering
         \begin{tabular}{| c | c | c |}
             \hline \HR $A$ & $B$ & $A \lor B$ \\
-            \hline И & И & И \\
-            \hline Л & И & И \\
-            \hline И & Л & И \\
-            \hline Л & Л & Л \\
+            \hline       И &   И & И \\
+            \hline       Л &   И & И \\
+            \hline       И &   Л & И \\
+            \hline       Л &   Л & Л \\
             \hline
         \end{tabular}
     \end{table}
@@ -76,13 +76,13 @@
         \begin{array}{@{} l @{}}
             \begin{array}{ | c | c | c | }
               \hline \HC \makebox[1em]{$A$} & \HC \makebox[1em]{$B$} & \HC \makebox[2.5em]{$A \supset B$} \\
-              \hline \text{И} & \text{И} & \text{И} \\
-              \hline \text{И} & \text{Л} & \text{Л}
+              \hline               \text{И} &               \text{И} & \text{И} \\
+              \hline               \text{И} &               \text{Л} & \text{Л}
             \end{array} \\
             \left.\kern-\nulldelimiterspace
             \begin{array}{ | c | c | c | }
               \hline \makebox[1em]{Л} & \makebox[1em]{И} & \makebox[2.5em]{\text{И}} \\
-              \hline \text{Л} & \text{Л} & \text{И} \\
+              \hline         \text{Л} &         \text{Л} & \text{И} \\
               \hline
             \end{array}
             \right\} \mbox{Принцип материальной импликации}
@@ -101,10 +101,10 @@
         \centering
         \begin{tabular}{| c | c | c |}
             \hline \HR $A$ & $B$ & $A \equiv B$ \\
-            \hline И & И & И \\
-            \hline Л & И & Л \\
-            \hline И & Л & Л \\
-            \hline Л & Л & И \\
+            \hline       И &   И & И \\
+            \hline       Л &   И & Л \\
+            \hline       И &   Л & Л \\
+            \hline       Л &   Л & И \\
             \hline
         \end{tabular}
     \end{table}
@@ -145,14 +145,14 @@
     \centering
     \begin{tabular}{| c | c | c | c | c | c | c |}
         \hline \HR $A$ & $B$ & $C$ & $\neg B$ & $A \land \neg B$ & $\neg(A \land \neg B)$ & $\neg(A \land \neg B) \supset C$ \\
-        \hline И & И & И & Л & Л & И & И \\
-        \hline И & И & Л & Л & Л & И & Л \\
-        \hline И & Л & И & И & И & Л & И \\
-        \hline И & Л & Л & И & И & Л & И \\
-        \hline Л & И & И & Л & Л & И & И \\
-        \hline Л & И & Л & Л & Л & И & Л \\
-        \hline Л & Л & И & И & Л & И & И \\
-        \hline Л & Л & Л & И & Л & И & Л \\
+        \hline       И &   И &   И &        Л &                Л &                      И & И \\
+        \hline       И &   И &   Л &        Л &                Л &                      И & Л \\
+        \hline       И &   Л &   И &        И &                И &                      Л & И \\
+        \hline       И &   Л &   Л &        И &                И &                      Л & И \\
+        \hline       Л &   И &   И &        Л &                Л &                      И & И \\
+        \hline       Л &   И &   Л &        Л &                Л &                      И & Л \\
+        \hline       Л &   Л &   И &        И &                Л &                      И & И \\
+        \hline       Л &   Л &   Л &        И &                Л &                      И & Л \\
         \hline
     \end{tabular}
 \end{table}
