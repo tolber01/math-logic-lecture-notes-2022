@@ -220,10 +220,10 @@
 \begin{definition*}
     Слово $1^{\alpha_1 + 1}01^{\alpha_2 + 1}0\dots01^{\alpha_n + 1}$ называется \textit{основным машинным кодом} (или просто \textit{кодом}) набора $\widetilde\alpha^n$ в двоичном алфавите $B = \{0, 1\}$.
 \end{definition*}
-Обозначается код $k\left(\widetilde\alpha^n\right)$. В частности, кодом неотрицательного целого числа $\alpha$ является слово $1^{\alpha + 1}$.
+Обозначается код $k(\widetilde\alpha^n)$. В частности, кодом неотрицательного целого числа $\alpha$ является слово $1^{\alpha + 1}$.
 
 \begin{definition*}
-    \textit{Частичной числовой функцией} называется функция $y = f\left(\widetilde x^n\right)$, у которой переменные $x_i$ принимают значения из множества целых неотрицательных чисел $\mathbb{N}_0 = \{0, 1, 2, \dots\}$ и $y \in \mathbb{N}_0$.
+    \textit{Частичной числовой функцией} называется функция $y = f(\widetilde x^n)$, у которой переменные $x_i$ принимают значения из множества целых неотрицательных чисел $\mathbb{N}_0 = \{0, 1, 2, \dots\}$ и $y \in \mathbb{N}_0$.
 \end{definition*}
 
 Таким образом, область определения частичной числовой функции $f$ есть $D_f \subseteq \mathbb{N}_0^n$ и область значений $E_f \subseteq \mathbb{N}_0$. Если первое включение заменяется равенством, то функция называется \textit{всюду определённой}.
@@ -231,8 +231,8 @@
 \begin{definition*}
     Частичная числовая функция $f$ называется \textit{вычислимой по Тьюрингу}, если существует машина Тьюринга $T_f$, обладающая свойствами:
     \begin{enumerate}
-        \item Если $f$ определена на наборе $\widetilde\alpha^n$, то $T_f\left(k\left(\widetilde\alpha^n\right)\right) = k\left(f\left(\widetilde\alpha^n\right)\right)$.
-        \item Если $f$ не определена на наборе $\widetilde\alpha^n$, то либо $T_f\left(k\left(\widetilde\alpha^n\right)\right)$ не является кодом никакого числа из $\mathbb{N}_0$, либо машина $T_f$ не применима к слову $k\left(\widetilde\alpha^n\right)$.
+        \item Если $f$ определена на наборе $\widetilde\alpha^n$, то $T_f\big(k(\widetilde\alpha^n)\big) = k\big(f(\widetilde\alpha^n)\big)$.
+        \item Если $f$ не определена на наборе $\widetilde\alpha^n$, то либо $T_f\big(k(\widetilde\alpha^n)\big)$ не является кодом никакого числа из $\mathbb{N}_0$, либо машина $T_f$ не применима к слову $k(\widetilde\alpha^n)$.
     \end{enumerate}
     Если функция $f$ вычислима по Тьюрингу с помощью машины $T_f$, то говорят, что машина $T_f$ \textit{вычисляет} функцию $f$.
 \end{definition*}
@@ -240,8 +240,8 @@
 \begin{definition*}
     Машина Тьюринга $T_f$ \textit{правильно вычисляет} функцию $f$, если:
     \begin{enumerate}
-        \item В случае, когда $f$ определена на наборе $\widetilde\alpha^n$, $T_f$, начав с самой левой единицы кода $k\left(\widetilde\alpha^n\right)$, останавливается, $T_f\left(k\left(\widetilde\alpha^n\right)\right) = k\left(f\left(\widetilde\alpha^n\right)\right)$, и головка в заключительной конфигурации обозревает самую левую единицу кода $k\left(f\left(\widetilde\alpha^n\right)\right)$.
-        \item В случае, когда $f$ не определена на наборе $\widetilde\alpha^n$, $T_f$, начав с самой левой единицы кода $k\left(\widetilde\alpha^n\right)$, не останавливается.
+        \item В случае, когда $f$ определена на наборе $\widetilde\alpha^n$, $T_f$, начав с самой левой единицы кода $k(\widetilde\alpha^n)$, останавливается, $T_f\big(k(\widetilde\alpha^n)\big) = k\big(f(\widetilde\alpha^n)\big)$, и головка в заключительной конфигурации обозревает самую левую единицу кода $k\big(f(\widetilde\alpha^n)\big)$.
+        \item В случае, когда $f$ не определена на наборе $\widetilde\alpha^n$, $T_f$, начав с самой левой единицы кода $k(\widetilde\alpha^n)$, не останавливается.
     \end{enumerate}
 \end{definition*}
 
